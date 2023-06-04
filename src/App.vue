@@ -1,15 +1,24 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <SectionOfMatrix :data="tasksData[0]" />
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import SectionOfMatrix from "./components/SectionOfMatrix.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    SectionOfMatrix,
+  },
+  data() {
+    return {
+      tasksData: [
+        {
+          name: "delegate",
+          tasks: ["a", "b", "c"],
+        },
+      ],
+    };
   },
 };
 </script>
