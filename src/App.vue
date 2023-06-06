@@ -1,5 +1,9 @@
 <template>
-  <SectionOfMatrix :data="tasksData[0]" />
+  <ul v-for="item in tasksData" :key="item">
+    <li>
+      <SectionOfMatrix :data="item" />
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -14,7 +18,7 @@ export default {
     return {
       tasksData: [
         {
-          name: "delegate",
+          name: "fire",
           tasks: [
             { name: "a", status: "todo" },
             { name: "b", status: "todo" },
@@ -22,12 +26,20 @@ export default {
           ],
         },
         {
-          name: "strategy",
+          name: "to delegate",
           tasks: [
             { name: "a2", status: "todo" },
             { name: "b2", status: "todo" },
             { name: "c2", status: "done" },
           ],
+        },
+        {
+          name: "strategy",
+          tasks: [],
+        },
+        {
+          name: "redundant",
+          tasks: [],
         },
       ],
     };
