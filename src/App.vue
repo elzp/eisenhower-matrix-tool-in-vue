@@ -15,7 +15,19 @@ export default {
       tasksData: [
         {
           name: "delegate",
-          tasks: ["a", "b", "c"],
+          tasks: [
+            { name: "a", status: "todo" },
+            { name: "b", status: "todo" },
+            { name: "c", status: "done" },
+          ],
+        },
+        {
+          name: "strategy",
+          tasks: [
+            { name: "a2", status: "todo" },
+            { name: "b2", status: "todo" },
+            { name: "c2", status: "done" },
+          ],
         },
       ],
     };

@@ -1,7 +1,9 @@
 <template>
   <div class="hello">
     <h1>{{ data.name }}</h1>
-    {{ tasks }}
+    <ul v-for="item in tasks" :key="item">
+      <li>{{ item.name }} - {{ item.status }}</li>
+    </ul>
   </div>
 </template>
 
@@ -13,7 +15,7 @@ export default {
   },
   data() {
     return {
-      tasks: JSON.stringify(this.data.tasks),
+      tasks: this.data.tasks,
     };
   },
 };
