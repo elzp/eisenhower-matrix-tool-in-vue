@@ -1,9 +1,12 @@
 <template>
   <div class="hello">
     <h1>{{ data.name }}</h1>
-    <ul v-for="item in tasks" :key="item">
-      <li>{{ item.name }} - {{ item.status }}</li>
-    </ul>
+    <div v-if="!this.isEmpty">
+      <ul v-for="item in tasks" :key="item">
+        <li>{{ item.name }} - {{ item.status }}</li>
+      </ul>
+    </div>
+    <div v-else>no task available</div>
   </div>
 </template>
 
@@ -16,7 +19,19 @@ export default {
   data() {
     return {
       tasks: this.data.tasks,
+      isEmpty: false,
     };
+  },
+  methods: {
+    checkIfIsEmpty(array) {
+      if (array.length === 0) {
+        return true;
+      }
+      return false;
+    },
+  },
+  mounted() {
+    this.isEmpty = this.checkIfIsEmpty(this.tasks);
   },
 };
 </script>
