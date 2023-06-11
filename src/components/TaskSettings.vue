@@ -33,6 +33,7 @@ export default {
         taskStatus: "",
         type: "",
       },
+      id: 0,
     };
   },
   methods: {},

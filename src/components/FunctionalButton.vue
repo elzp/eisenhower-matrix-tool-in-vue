@@ -11,7 +11,8 @@ export default {
   name: "FunctionalButton",
   props: {
     type: String,
-    // taskType: String,
+    id: Number,
+    taskType: String,
   },
   data() {
     return;
@@ -27,6 +28,8 @@ export default {
         this.$emit("settings", {
           buttonName: "update",
           settingsVisibility: true,
+          taskType: this.taskType,
+          id: this.id,
         });
       }
     },

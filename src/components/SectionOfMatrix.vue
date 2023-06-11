@@ -4,6 +4,7 @@
     <FunctionalButton
       :type="'add new'"
       :taskType="data.name"
+      :id="0"
       @settings="getSettingsData"
     />
     <div v-if="!this.isEmpty">
@@ -14,6 +15,7 @@
             <FunctionalButton
               :type="'change'"
               :taskType="data.name"
+              :id="item.id"
               @settings="getSettingsData"
             />
           </div>
@@ -33,7 +35,7 @@ export default {
     FunctionalButton,
   },
   props: {
-    data: Array,
+    data: Object,
   },
   data() {
     return {
