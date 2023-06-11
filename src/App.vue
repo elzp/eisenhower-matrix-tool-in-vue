@@ -70,6 +70,13 @@ export default {
     getSettingsData(sendData) {
       this.visibility = sendData.settingsVisibility;
       this.buttonName = sendData.buttonName;
+      if (sendData?.id > 0) {
+        this.dataToChange = {
+          task: this.tasksData.filter((it) => it.name === sendData.taskType)[0]
+            .tasks[sendData.id - 1],
+          type: sendData.taskType,
+        };
+      }
     },
   },
 };
