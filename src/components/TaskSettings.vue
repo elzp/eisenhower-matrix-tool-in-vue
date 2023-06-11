@@ -38,4 +38,31 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.form {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid black;
+  width: max-content;
+  padding: 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+h1 {
+  margin: 5px;
+}
+.section {
+  display: flex;
+  flex-direction: column;
+}
+.description {
+  width: 150px;
+  padding: 2px;
+}
+</style>
