@@ -51,10 +51,7 @@ export default {
       return false;
     },
     getSettingsData(sendData) {
-      this.$emit("settings", {
-        buttonName: sendData.buttonName,
-        settingsVisibility: sendData.settingsVisibility,
-      });
+      this.$emit("settings", sendData);
     },
   },
   mounted() {
