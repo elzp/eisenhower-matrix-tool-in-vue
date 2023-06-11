@@ -5,17 +5,20 @@
       <SectionOfMatrix :data="item" />
     </li>
   </ul>
+  <TaskSettings />
 </template>
 
 <script>
 import SectionOfMatrix from "./components/SectionOfMatrix.vue";
 import FunctionalButton from "./components/FunctionalButton.vue";
+import TaskSettings from "./components/TaskSettings.vue";
 
 export default {
   name: "App",
   components: {
     SectionOfMatrix,
     FunctionalButton,
+    TaskSettings,
   },
   data() {
     return {
