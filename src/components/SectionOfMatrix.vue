@@ -1,9 +1,15 @@
 <template>
   <div class="hello">
     <h1>{{ data.name }}</h1>
+    <FunctionalButton :type="'add'" :taskType="data.name" />
     <div v-if="!this.isEmpty">
       <ul v-for="item in tasks" :key="item">
-        <li>{{ item.name }} - {{ item.status }}</li>
+        <li>
+          <div>
+            <div>{{ item.name }} - {{ item.status }}</div>
+            <FunctionalButton :type="'change'" :taskType="data.name" />
+          </div>
+        </li>
       </ul>
     </div>
     <div v-else>no task available</div>
@@ -11,8 +17,13 @@
 </template>
 
 <script>
+import FunctionalButton from "./FunctionalButton.vue";
+
 export default {
   name: "SectionOfMatrix",
+  components: {
+    FunctionalButton,
+  },
   props: {
     data: Array,
   },
@@ -38,9 +49,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
 ul {
   list-style-type: none;
   padding: 0;

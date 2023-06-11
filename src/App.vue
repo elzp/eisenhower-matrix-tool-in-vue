@@ -1,4 +1,5 @@
 <template>
+  <FunctionalButton :type="'add'" :taskType="'choose'" />
   <ul v-for="item in tasksData" :key="item">
     <li>
       <SectionOfMatrix :data="item" />
@@ -8,11 +9,13 @@
 
 <script>
 import SectionOfMatrix from "./components/SectionOfMatrix.vue";
+import FunctionalButton from "./components/FunctionalButton.vue";
 
 export default {
   name: "App",
   components: {
     SectionOfMatrix,
+    FunctionalButton,
   },
   data() {
     return {
