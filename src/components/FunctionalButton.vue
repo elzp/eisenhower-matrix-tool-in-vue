@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button class="button">{{ type }}</button>
+    <button class="button" @click="onClick">
+      {{ type }}
+    </button>
   </div>
 </template>
 
@@ -13,6 +15,21 @@ export default {
   },
   data() {
     return;
+  },
+  methods: {
+    onClick() {
+      if (this.type === "add new") {
+        this.$emit("settings", {
+          buttonName: "add",
+          settingsVisibility: true,
+        });
+      } else if (this.type === "change") {
+        this.$emit("settings", {
+          buttonName: "update",
+          settingsVisibility: true,
+        });
+      }
+    },
   },
 };
 </script>
