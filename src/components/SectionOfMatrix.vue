@@ -1,13 +1,21 @@
 <template>
   <div class="hello">
     <h1>{{ data.name }}</h1>
-    <FunctionalButton :type="'add'" :taskType="data.name" />
+    <FunctionalButton
+      :type="'add new'"
+      :taskType="data.name"
+      @settings="getSettingsData"
+    />
     <div v-if="!this.isEmpty">
       <ul v-for="item in tasks" :key="item">
         <li>
           <div>
             <div>{{ item.name }} - {{ item.status }}</div>
-            <FunctionalButton :type="'change'" :taskType="data.name" />
+            <FunctionalButton
+              :type="'change'"
+              :taskType="data.name"
+              @settings="getSettingsData"
+            />
           </div>
         </li>
       </ul>
@@ -39,6 +47,12 @@ export default {
         return true;
       }
       return false;
+    },
+    getSettingsData(sendData) {
+      this.$emit("settings", {
+        buttonName: sendData.buttonName,
+        settingsVisibility: sendData.settingsVisibility,
+      });
     },
   },
   mounted() {

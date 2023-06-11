@@ -1,8 +1,12 @@
 <template>
-  <FunctionalButton :type="'add'" :taskType="'choose'" />
+  <FunctionalButton
+    :type="'add new'"
+    :taskType="'choose'"
+    @settings="getSettingsData"
+  />
   <ul v-for="item in tasksData" :key="item">
     <li>
-      <SectionOfMatrix :data="item" />
+      <SectionOfMatrix :data="item" @settings="getSettingsData" />
     </li>
   </ul>
   <div v-if="visibility">
@@ -53,6 +57,12 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    getSettingsData(sendData) {
+      this.visibility = sendData.settingsVisibility;
+      this.buttonName = sendData.buttonName;
+    },
   },
 };
 </script>
