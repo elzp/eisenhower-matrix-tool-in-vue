@@ -13,7 +13,7 @@
       <div class="description">Task type:</div>
       <input v-model="form.type" type="text" placeholder="Text input" />
     </div>
-    <FunctionalButton :type="'update'" />
+    <FunctionalButton :type="buttonName" />
   </div>
 </template>
 
@@ -23,7 +23,9 @@ import FunctionalButton from "./FunctionalButton.vue";
 export default {
   name: "TaskSettings",
   components: { FunctionalButton },
-  props: {},
+  props: {
+    buttonName: String,
+  },
   data() {
     return {
       form: {

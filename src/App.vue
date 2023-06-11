@@ -5,7 +5,9 @@
       <SectionOfMatrix :data="item" />
     </li>
   </ul>
-  <TaskSettings />
+  <div v-if="visibility">
+    <TaskSettings :buttonName="buttonName" />
+  </div>
 </template>
 
 <script>
@@ -22,6 +24,8 @@ export default {
   },
   data() {
     return {
+      visibility: false,
+      buttonName: "add",
       tasksData: [
         {
           name: "fire",
