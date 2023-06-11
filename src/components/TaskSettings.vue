@@ -25,13 +25,14 @@ export default {
   components: { FunctionalButton },
   props: {
     buttonName: String,
+    dataToChange: Object,
   },
   data() {
     return {
       form: {
-        taskName: "",
-        taskStatus: "",
-        type: "",
+        taskName: this.dataToChange.task.name,
+        taskStatus: this.dataToChange.task.status,
+        type: this.dataToChange.type,
       },
       id: 0,
     };

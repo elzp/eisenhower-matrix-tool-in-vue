@@ -10,7 +10,7 @@
     </li>
   </ul>
   <div v-if="visibility">
-    <TaskSettings :buttonName="buttonName" />
+    <TaskSettings :buttonName="buttonName" :dataToChange="dataToChange" />
   </div>
 </template>
 
@@ -30,6 +30,14 @@ export default {
     return {
       visibility: false,
       buttonName: "add",
+      dataToChange: {
+        task: {
+          name: "",
+          status: "",
+          id: 0,
+        },
+        type: "",
+      },
       tasksData: [
         {
           name: "fire",
