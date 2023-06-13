@@ -13,7 +13,11 @@
       <div class="description">Task type:</div>
       <input v-model="form.type" type="text" placeholder="Text input" />
     </div>
-    <FunctionalButton :type="buttonName" />
+    <FunctionalButton
+      :type="buttonName"
+      @newTask="emitNewTask"
+      @updateTask="emitToUuwageTask"
+    />
   </div>
 </template>
 

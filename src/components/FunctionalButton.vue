@@ -31,6 +31,10 @@ export default {
           taskType: this.taskType,
           id: this.id,
         });
+      } else if (this.type === "add") {
+        this.$emit("newTask");
+      } else if (this.type === "update") {
+        this.$emit("updateTask");
       }
     },
   },
