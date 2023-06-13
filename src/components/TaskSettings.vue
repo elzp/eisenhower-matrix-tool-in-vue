@@ -5,7 +5,7 @@
       <div class="description">Task description:</div>
       <input v-model="form.taskName" type="text" placeholder="Text input" />
     </div>
-    <div class="section">
+    <div class="section" v-if="buttonName !== 'add'">
       <div class="description">Task status:</div>
       <input v-model="form.taskStatus" type="text" placeholder="Text input" />
     </div>
@@ -34,7 +34,7 @@ export default {
         taskStatus: this.dataToChange.task.status,
         type: this.dataToChange.type,
       },
-      id: 0,
+      id: this.dataToChange.task.id,
     };
   },
   methods: {},
