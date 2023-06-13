@@ -16,7 +16,7 @@
     <FunctionalButton
       :type="buttonName"
       @newTask="emitNewTask"
-      @updateTask="emitToUuwageTask"
+      @updateTask="emitToUpdateTask"
     />
   </div>
 </template>
@@ -41,7 +41,22 @@ export default {
       id: this.dataToChange.task.id,
     };
   },
-  methods: {},
+  methods: {
+    emitNewTask() {
+      this.$emit("taskToAdd", {
+        type: this.form.type,
+        taskName: this.form.taskName,
+      });
+    },
+    emitToUpdateTask() {
+      this.$emit("TaskToUpdate", {
+        type: this.form.type,
+        name: this.form.taskName,
+        status: this.form.taskStatus,
+        id: this.id,
+      });
+    },
+  },
 };
 </script>
 
