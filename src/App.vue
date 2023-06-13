@@ -10,7 +10,12 @@
     </li>
   </ul>
   <div v-if="visibility">
-    <TaskSettings :buttonName="buttonName" :dataToChange="dataToChange" />
+    <TaskSettings
+      :buttonName="buttonName"
+      :dataToChange="dataToChange"
+      @taskToAdd="addNew"
+      @TaskToUpdate="update"
+    />
   </div>
 </template>
 
