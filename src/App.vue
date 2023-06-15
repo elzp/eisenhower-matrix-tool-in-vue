@@ -84,7 +84,16 @@ export default {
       }
     },
     addNew(sendData) {
-      console.log(sendData);
+      this.tasksData.forEach((it) => {
+        if (it.name === sendData.type) {
+          const length = it.tasks.length;
+          it.tasks.push({
+            name: sendData.taskName,
+            status: "todo",
+            id: it.tasks[length - 1].id + 1,
+          });
+        }
+      });
       this.visibility = false;
     },
     update(sendData) {
