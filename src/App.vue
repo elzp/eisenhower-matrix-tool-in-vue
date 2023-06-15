@@ -83,6 +83,14 @@ export default {
         };
       }
     },
+    addNew(sendData) {
+      console.log(sendData);
+      this.visibility = false;
+    },
+    update(sendData) {
+      this.visibility = false;
+      console.log(sendData);
+    },
   },
 };
 </script>
