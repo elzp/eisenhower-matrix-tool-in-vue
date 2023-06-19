@@ -107,6 +107,7 @@ export default {
     update(sendData) {
       this.visibility = false;
       console.log(sendData);
+      this.dataToChange = this.defaultdataToChange;
     },
   },
 };
