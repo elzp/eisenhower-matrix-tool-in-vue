@@ -89,6 +89,8 @@ export default {
             .tasks[sendData.id - 1],
           type: sendData.taskType,
         };
+      } else {
+        this.dataToChange.type = sendData.taskType;
       }
     },
     addNew(sendData) {
