@@ -1,7 +1,7 @@
 <template>
   <FunctionalButton
     :type="'add new'"
-    :taskType="'choose'"
+    :taskType="''"
     @settings="getSettingsData"
   />
   <ul v-for="item in tasksData" :key="item">
@@ -35,6 +35,14 @@ export default {
     return {
       visibility: false,
       buttonName: "add",
+      defaultdataToChange: {
+        task: {
+          name: "",
+          status: "",
+          id: 0,
+        },
+        type: "",
+      },
       dataToChange: {
         task: {
           name: "",
