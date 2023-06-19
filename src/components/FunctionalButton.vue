@@ -23,6 +23,7 @@ export default {
         this.$emit("settings", {
           buttonName: "add",
           settingsVisibility: true,
+          taskType: this.taskType,
         });
       } else if (this.type === "change") {
         this.$emit("settings", {
