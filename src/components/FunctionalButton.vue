@@ -15,7 +15,7 @@ export default {
     taskType: String,
   },
   data() {
-    return;
+    return {};
   },
   methods: {
     onClick() {
