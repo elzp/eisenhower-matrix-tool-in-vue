@@ -12,6 +12,7 @@
     <div class="section">
       <div class="description">Task type:</div>
       <input v-model="form.type" type="text" placeholder="Text input" />
+      <SelectComp :firstSelected="dataToChange.type" />
     </div>
     <FunctionalButton
       :type="buttonName"
@@ -23,10 +24,11 @@
 
 <script>
 import FunctionalButton from "./FunctionalButton.vue";
+import SelectComp from "./SelectComp.vue";
 
 export default {
   name: "TaskSettings",
-  components: { FunctionalButton },
+  components: { FunctionalButton, SelectComp },
   props: {
     buttonName: String,
     dataToChange: Object,
