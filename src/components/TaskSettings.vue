@@ -11,7 +11,6 @@
     </div>
     <div class="section">
       <div class="description">Task type:</div>
-      <input v-model="form.type" type="text" placeholder="Text input" />
       <SelectComp :firstSelected="dataToChange.type" @newType="update" />
     </div>
     <FunctionalButton
