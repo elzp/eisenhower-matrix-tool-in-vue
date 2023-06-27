@@ -12,7 +12,7 @@
     <div class="section">
       <div class="description">Task type:</div>
       <input v-model="form.type" type="text" placeholder="Text input" />
-      <SelectComp :firstSelected="dataToChange.type" />
+      <SelectComp :firstSelected="dataToChange.type" @newType="update" />
     </div>
     <FunctionalButton
       :type="buttonName"
@@ -57,6 +57,10 @@ export default {
         status: this.form.taskStatus,
         id: this.id,
       });
+    },
+    update(sendData) {
+      console.log(sendData);
+      this.form.type = sendData;
     },
   },
 };
