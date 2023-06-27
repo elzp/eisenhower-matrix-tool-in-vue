@@ -1,7 +1,12 @@
 <template>
   <div class="select">
-    <select v-model="selected" style="width: 200px">
-      <option v-for="value in values" :value="value" :key="value">
+    <select v-model="selected" style="width: 200px" @change="update">
+      <option
+        v-for="value in values"
+        :value="value"
+        :key="value"
+        @change="update"
+      >
         {{ value }}
       </option>
     </select>
@@ -24,7 +29,11 @@ export default {
       values: ["fire", "to delegate", "strategy", "redundant"],
     };
   },
-  methods: {},
+  methods: {
+    update(e) {
+      this.$emit("newType", e.target.value);
+    },
+  },
   created() {
     this.selected = ref(this.firstSelected);
   },
