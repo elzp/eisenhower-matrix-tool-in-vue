@@ -7,7 +7,24 @@
     </div>
     <div class="section" v-if="buttonName !== 'add'">
       <div class="description">Task status:</div>
-      <input v-model="form.taskStatus" type="text" placeholder="Text input" />
+      <div class="radio">
+        <input
+          type="radio"
+          v-model="form.taskStatus"
+          :value="statuses[0].value"
+          :id="statuses[0].value"
+        />
+        <label :for="statuses[0].value">{{ statuses[0].label }}</label>
+      </div>
+      <div class="radio">
+        <input
+          type="radio"
+          v-model="form.taskStatus"
+          :value="statuses[1].value"
+          :id="statuses[1].value"
+        />
+        <label :for="statuses[1].value">{{ statuses[1].label }}</label>
+      </div>
     </div>
     <div class="section">
       <div class="description">Task type:</div>
@@ -34,6 +51,16 @@ export default {
   },
   data() {
     return {
+      statuses: [
+        {
+          value: "todo",
+          label: "to do",
+        },
+        {
+          value: "done",
+          label: "done",
+        },
+      ],
       form: {
         taskName: this.dataToChange.task.name,
         taskStatus: this.dataToChange.task.status,
@@ -92,5 +119,10 @@ h1 {
 .description {
   width: 150px;
   padding: 2px;
+}
+.radio {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
 }
 </style>
