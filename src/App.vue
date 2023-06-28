@@ -97,11 +97,12 @@ export default {
       this.tasksData.forEach((it) => {
         if (it.name === sendData.type) {
           const length = it.tasks.length;
-          it.tasks.push({
+          const newTask = {
             name: sendData.taskName,
             status: "todo",
-            id: it.tasks[length - 1].id + 1,
-          });
+            id: length !== 0 ? it.tasks[length - 1].id + 1 : 1,
+          };
+          it.tasks.push(newTask);
         }
       });
       this.visibility = false;

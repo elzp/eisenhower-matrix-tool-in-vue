@@ -7,7 +7,7 @@
       :id="0"
       @settings="getSettingsData"
     />
-    <div v-if="!this.isEmpty">
+    <div v-if="!this.checkIfIsEmpty(this.tasks)">
       <ul v-for="item in tasks" :key="item">
         <li>
           <div>
@@ -39,8 +39,7 @@ export default {
   },
   data() {
     return {
-      tasks: this.data.tasks,
-      isEmpty: false,
+      tasks: this.data.tasks || [],
     };
   },
   methods: {
@@ -53,9 +52,6 @@ export default {
     getSettingsData(sendData) {
       this.$emit("settings", sendData);
     },
-  },
-  mounted() {
-    this.isEmpty = this.checkIfIsEmpty(this.tasks);
   },
 };
 </script>
