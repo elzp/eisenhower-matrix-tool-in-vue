@@ -85,7 +85,6 @@ export default {
       });
     },
     update(sendData) {
-      console.log(sendData);
       this.form.type = sendData;
     },
   },
