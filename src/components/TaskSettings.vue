@@ -47,7 +47,8 @@
     </div>
     <div class="section">
       <div class="description">Task type:</div>
-      <span>{{ form.type }}</span>
+      {{ form.type }}
+      <SelectComp :firstSelected="form.type" @newType="update" />
     </div>
     <FunctionalButton
       :type="buttonName"
@@ -59,10 +60,11 @@
 
 <script>
 import FunctionalButton from "./FunctionalButton.vue";
+import SelectComp from "./SelectComp.vue";
 
 export default {
   name: "TaskSettings",
-  components: { FunctionalButton },
+  components: { FunctionalButton, SelectComp },
   props: {
     buttonName: String,
     dataToChange: Object,
