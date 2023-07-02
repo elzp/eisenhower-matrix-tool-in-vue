@@ -130,6 +130,9 @@ export default {
             };
             it.tasks.push(newTask);
           }
+          if (it.name === sendData.prevType) {
+            it.tasks.splice(sendData.id - 1, 1);
+          }
         });
       }
       this.dataToChange = this.defaultdataToChange;
