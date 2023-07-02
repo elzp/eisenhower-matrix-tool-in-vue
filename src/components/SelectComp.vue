@@ -37,6 +37,12 @@ export default {
   created() {
     this.selected = ref(this.firstSelected);
   },
+  beforeUpdate() {
+    this.selected = ref(this.firstSelected);
+  },
+  updated() {
+    this.selected = ref(this.firstSelected);
+  },
 };
 </script>
 
