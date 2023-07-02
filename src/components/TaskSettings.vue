@@ -129,29 +129,32 @@ export default {
         }
       }
     },
+    convertTypeToAttributes(type) {
+      switch (type) {
+        case "fire":
+          this.taskAttribute.important = true;
+          this.taskAttribute.urgent = true;
+          break;
+        case "to delegate":
+          this.taskAttribute.important = false;
+          this.taskAttribute.urgent = true;
+          break;
+        case "strategy":
+          this.taskAttribute.important = true;
+          this.taskAttribute.urgent = false;
+          break;
+        case "redundant":
+          this.taskAttribute.important = false;
+          this.taskAttribute.urgent = false;
+          break;
+        default:
+          this.taskAttribute.important = false;
+          this.taskAttribute.urgent = false;
+      }
+    },
   },
   created() {
-    switch (this.dataToChange.type) {
-      case "fire":
-        this.taskAttribute.important = true;
-        this.taskAttribute.urgent = true;
-        break;
-      case "to delegate":
-        this.taskAttribute.important = false;
-        this.taskAttribute.urgent = true;
-        break;
-      case "strategy":
-        this.taskAttribute.important = true;
-        this.taskAttribute.urgent = false;
-        break;
-      case "redundant":
-        this.taskAttribute.important = false;
-        this.taskAttribute.urgent = false;
-        break;
-      default:
-        this.taskAttribute.important = false;
-        this.taskAttribute.urgent = false;
-    }
+    this.convertTypeToAttributes(this.dataToChange.type);
   },
 };
 </script>
