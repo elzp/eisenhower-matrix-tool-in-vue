@@ -64,7 +64,7 @@ export default {
       form: {
         taskName: this.dataToChange.task.name,
         taskStatus: this.dataToChange.task.status,
-        type: this.dataToChange.type,
+        type: this.dataToChange.type || "redundant",
       },
       id: this.dataToChange.task.id,
     };
