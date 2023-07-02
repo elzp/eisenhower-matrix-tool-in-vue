@@ -110,6 +110,7 @@ export default {
       });
     },
     update(sendData) {
+      this.convertTypeToAttributes(sendData);
       this.form.type = sendData;
     },
     changeType() {
