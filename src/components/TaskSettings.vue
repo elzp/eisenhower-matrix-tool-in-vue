@@ -27,8 +27,27 @@
       </div>
     </div>
     <div class="section">
+      <div class="description">Task attributes:</div>
+      <div class="checkbox">
+        <input
+          type="checkbox"
+          id="urgent"
+          v-model="taskAttribute.urgent"
+          @change="changeType"
+        />
+        <label for="urgent">urgent</label>
+        <input
+          type="checkbox"
+          id="important"
+          v-model="taskAttribute.important"
+          @change="changeType"
+        />
+        <label for="important">important</label>
+      </div>
+    </div>
+    <div class="section">
       <div class="description">Task type:</div>
-      <SelectComp :firstSelected="dataToChange.type" @newType="update" />
+      <span>{{ form.type }}</span>
     </div>
     <FunctionalButton
       :type="buttonName"
@@ -40,11 +59,10 @@
 
 <script>
 import FunctionalButton from "./FunctionalButton.vue";
-import SelectComp from "./SelectComp.vue";
 
 export default {
   name: "TaskSettings",
-  components: { FunctionalButton, SelectComp },
+  components: { FunctionalButton },
   props: {
     buttonName: String,
     dataToChange: Object,
@@ -61,6 +79,10 @@ export default {
           label: "done",
         },
       ],
+      taskAttribute: {
+        urgent: false,
+        important: false,
+      },
       form: {
         taskName: this.dataToChange.task.name,
         taskStatus: this.dataToChange.task.status,
