@@ -79,6 +79,7 @@ export default {
     emitToUpdateTask() {
       this.$emit("TaskToUpdate", {
         type: this.form.type,
+        prevType: this.dataToChange.type,
         name: this.form.taskName,
         status: this.form.taskStatus,
         id: this.id,

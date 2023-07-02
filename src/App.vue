@@ -108,9 +108,19 @@ export default {
       this.visibility = false;
     },
     update(sendData) {
-      this.visibility = false;
-      console.log(sendData);
+      if (sendData.prevType === sendData.type) {
+        this.tasksData.forEach((it) => {
+          if (it.name === sendData.type) {
+            it.tasks[sendData.id - 1] = {
+              name: sendData.name,
+              status: sendData.status,
+              id: sendData.id,
+            };
+          }
+        });
+      }
       this.dataToChange = this.defaultdataToChange;
+      this.visibility = false;
     },
   },
 };
