@@ -110,6 +110,23 @@ export default {
     update(sendData) {
       this.form.type = sendData;
     },
+    changeType() {
+      const important = this.taskAttribute.important;
+      const urgent = this.taskAttribute.urgent;
+      if (urgent) {
+        if (important) {
+          this.form.type = "fire";
+        } else {
+          this.form.type = "to delegate";
+        }
+      } else {
+        if (important) {
+          this.form.type = "strategy";
+        } else {
+          this.form.type = "redundant";
+        }
+      }
+    },
   },
   created() {
     switch (this.dataToChange.type) {
