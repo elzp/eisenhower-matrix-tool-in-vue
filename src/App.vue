@@ -118,6 +118,19 @@ export default {
             };
           }
         });
+      } else {
+        this.tasksData.forEach((it) => {
+          // add to new type
+          if (it.name === sendData.type) {
+            const length = it.tasks.length;
+            const newTask = {
+              name: sendData.name,
+              status: sendData.status,
+              id: length !== 0 ? it.tasks[length - 1].id + 1 : 1,
+            };
+            it.tasks.push(newTask);
+          }
+        });
       }
       this.dataToChange = this.defaultdataToChange;
       this.visibility = false;
