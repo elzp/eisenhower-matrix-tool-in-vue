@@ -1,14 +1,21 @@
 <template>
+  <button @click="toggleMatrix">Matrix view</button>
   <FunctionalButton
     :type="'add new'"
     :taskType="''"
     @settings="getSettingsData"
   />
-  <ul v-for="item in tasksData" :key="item">
-    <li>
-      <SectionOfMatrix :data="item" @settings="getSettingsData" />
-    </li>
-  </ul>
+  <div :class="style">
+    <ul v-for="item in tasksData" :key="item" :style="chooseStyle(item.name)">
+      <li>
+        <SectionOfMatrix
+          :data="item"
+          @settings="getSettingsData"
+          :style="style"
+        />
+      </li>
+    </ul>
+  </div>
   <div v-if="visibility">
     <TaskSettings
       :buttonName="buttonName"
@@ -35,6 +42,13 @@ export default {
     return {
       visibility: false,
       buttonName: "add",
+      style: "matrix",
+      borderMapping: {
+        fire: ["bottom", "left"],
+        delegate: ["bottom", "right"],
+        strategy: ["top", "left"],
+        redundant: ["top", "right"],
+      },
       defaultdataToChange: {
         task: {
           name: "",
@@ -61,7 +75,7 @@ export default {
           ],
         },
         {
-          name: "to delegate",
+          name: "delegate",
           tasks: [
             { name: "a2", status: "todo", id: 1 },
             { name: "b2", status: "todo", id: 2 },
@@ -138,6 +152,33 @@ export default {
       this.dataToChange = this.defaultdataToChange;
       this.visibility = false;
     },
+    chooseStyle(nameOfType) {
+      switch (this.style) {
+        case "matrix":
+          return {
+            "grid-area": nameOfType,
+            ...this.defineBorder(nameOfType),
+          };
+        default:
+          return {};
+      }
+    },
+    defineBorder(typeName) {
+      return {
+        [`border-${this.borderMapping[`${typeName}`][0]}`]: "2px solid red",
+        [`border-${this.borderMapping[`${typeName}`][1]}`]: "2px solid red",
+      };
+    },
+    toggleMatrix() {
+      switch (this.style) {
+        case "matrix":
+          this.style = "";
+          break;
+        default:
+          this.style = "matrix";
+          break;
+      }
+    },
   },
 };
 </script>
@@ -150,5 +191,18 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+ul {
+  list-style-type: none;
+}
+.matrix {
+  display: grid;
+  grid-template-areas: "delegate fire" "redundant strategy";
+}
+.matrix > ul {
+  margin: 0;
+  padding: 0;
+  position: relative;
 }
 </style>
