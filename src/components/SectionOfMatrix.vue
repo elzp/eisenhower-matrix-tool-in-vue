@@ -23,6 +23,18 @@
       </ul>
     </div>
     <div v-else>no task available</div>
+    <svg
+      v-if="
+        (data.name === 'fire' || data.name === 'delegate') && style === 'matrix'
+      "
+      :class="'arrow-' + `${data.name}`"
+      xmlns="http://www.w3.org/2000/svg"
+      width="28"
+      height="28"
+      viewBox="0 0 28 28"
+    >
+      <path d="M3 3 L3 25 L23 14 z" stroke="red" stroke-width="3" fill="red" />
+    </svg>
   </div>
 </template>
 
@@ -36,10 +48,12 @@ export default {
   },
   props: {
     data: Object,
+    style: String,
   },
   data() {
     return {
       tasks: this.data.tasks || [],
+      styleOfArrow: {},
     };
   },
   methods: {
@@ -52,10 +66,22 @@ export default {
     getSettingsData(sendData) {
       this.$emit("settings", sendData);
     },
+    setArrowStyle(name) {
+      let styleOfArrow;
+      if (name === "delegate") {
+        styleOfArrow = {
+          position: "absolute",
+          top: "calc(0% - 6px)",
+          left: "calc(100% - 12px)",
+          rotate: "-90deg",
+        };
+      }
+      this.styleOfArrow = styleOfArrow;
+    },
   },
-  mounted() {
-    console.log(this.border);
-  },
+  // mounted() {
+  //   console.log(this.setArrowStyle(this.props.data.name));
+  // },
 };
 </script>
 
@@ -71,5 +97,17 @@ li {
 }
 a {
   color: #42b983;
+}
+.arrow-delegate {
+  position: absolute;
+  top: calc(0% - 6px);
+  left: calc(100% - 12px);
+  transform: rotate(-90deg);
+}
+
+.arrow-fire {
+  position: absolute;
+  top: calc(100% - 13px);
+  left: calc(100% - 22px);
 }
 </style>

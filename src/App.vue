@@ -7,7 +7,11 @@
   <div class="matrix">
     <ul v-for="item in tasksData" :key="item" :style="chooseStyle(item.name)">
       <li>
-        <SectionOfMatrix :data="item" @settings="getSettingsData" />
+        <SectionOfMatrix
+          :data="item"
+          @settings="getSettingsData"
+          :style="style"
+        />
       </li>
     </ul>
   </div>
@@ -37,6 +41,7 @@ export default {
     return {
       visibility: false,
       buttonName: "add",
+      style: "matrix",
       borderMapping: {
         fire: ["bottom", "left"],
         delegate: ["bottom", "right"],
@@ -182,5 +187,6 @@ ul {
 .matrix > ul {
   margin: 0;
   padding: 0;
+  position: relative;
 }
 </style>
