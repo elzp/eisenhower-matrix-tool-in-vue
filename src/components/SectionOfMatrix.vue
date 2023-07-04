@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>{{ data.name }}</h1>
     <FunctionalButton
       :type="'add new'"

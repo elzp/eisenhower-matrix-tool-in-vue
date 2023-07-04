@@ -4,11 +4,13 @@
     :taskType="''"
     @settings="getSettingsData"
   />
-  <ul v-for="item in tasksData" :key="item">
-    <li>
-      <SectionOfMatrix :data="item" @settings="getSettingsData" />
-    </li>
-  </ul>
+  <div class="matrix">
+    <ul v-for="item in tasksData" :key="item" :style="chooseStyle(item.name)">
+      <li>
+        <SectionOfMatrix :data="item" @settings="getSettingsData" />
+      </li>
+    </ul>
+  </div>
   <div v-if="visibility">
     <TaskSettings
       :buttonName="buttonName"
@@ -61,7 +63,7 @@ export default {
           ],
         },
         {
-          name: "to delegate",
+          name: "delegate",
           tasks: [
             { name: "a2", status: "todo", id: 1 },
             { name: "b2", status: "todo", id: 2 },
@@ -138,6 +140,9 @@ export default {
       this.dataToChange = this.defaultdataToChange;
       this.visibility = false;
     },
+    chooseStyle(nameOfType) {
+      return { "grid-area": nameOfType };
+    },
   },
 };
 </script>
@@ -154,5 +159,9 @@ export default {
 
 ul {
   list-style-type: none;
+}
+.matrix {
+  display: grid;
+  grid-template-areas: "delegate fire" "redundant strategy";
 }
 </style>
