@@ -37,6 +37,12 @@ export default {
     return {
       visibility: false,
       buttonName: "add",
+      borderMapping: {
+        fire: ["bottom", "left"],
+        delegate: ["bottom", "right"],
+        strategy: ["top", "left"],
+        redundant: ["top", "right"],
+      },
       defaultdataToChange: {
         task: {
           name: "",
@@ -141,7 +147,16 @@ export default {
       this.visibility = false;
     },
     chooseStyle(nameOfType) {
-      return { "grid-area": nameOfType };
+      return {
+        "grid-area": nameOfType,
+        ...this.defineBorder(nameOfType),
+      };
+    },
+    defineBorder(typeName) {
+      return {
+        [`border-${this.borderMapping[`${typeName}`][0]}`]: "2px solid red",
+        [`border-${this.borderMapping[`${typeName}`][1]}`]: "2px solid red",
+      };
     },
   },
 };
@@ -163,5 +178,9 @@ ul {
 .matrix {
   display: grid;
   grid-template-areas: "delegate fire" "redundant strategy";
+}
+.matrix > ul {
+  margin: 0;
+  padding: 0;
 }
 </style>

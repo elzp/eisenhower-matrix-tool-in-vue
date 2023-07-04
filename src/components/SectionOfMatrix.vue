@@ -53,6 +53,9 @@ export default {
       this.$emit("settings", sendData);
     },
   },
+  mounted() {
+    console.log(this.border);
+  },
 };
 </script>
 
