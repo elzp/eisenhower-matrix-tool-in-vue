@@ -1,10 +1,11 @@
 <template>
+  <button @click="toggleMatrix">Matrix view</button>
   <FunctionalButton
     :type="'add new'"
     :taskType="''"
     @settings="getSettingsData"
   />
-  <div class="matrix">
+  <div :class="style">
     <ul v-for="item in tasksData" :key="item" :style="chooseStyle(item.name)">
       <li>
         <SectionOfMatrix
@@ -152,16 +153,31 @@ export default {
       this.visibility = false;
     },
     chooseStyle(nameOfType) {
-      return {
-        "grid-area": nameOfType,
-        ...this.defineBorder(nameOfType),
-      };
+      switch (this.style) {
+        case "matrix":
+          return {
+            "grid-area": nameOfType,
+            ...this.defineBorder(nameOfType),
+          };
+        default:
+          return {};
+      }
     },
     defineBorder(typeName) {
       return {
         [`border-${this.borderMapping[`${typeName}`][0]}`]: "2px solid red",
         [`border-${this.borderMapping[`${typeName}`][1]}`]: "2px solid red",
       };
+    },
+    toggleMatrix() {
+      switch (this.style) {
+        case "matrix":
+          this.style = "";
+          break;
+        default:
+          this.style = "matrix";
+          break;
+      }
     },
   },
 };
