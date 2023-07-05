@@ -109,5 +109,6 @@ a {
   position: absolute;
   top: calc(100% - 13px);
   left: calc(100% - 22px);
+  z-index: 3;
 }
 </style>
