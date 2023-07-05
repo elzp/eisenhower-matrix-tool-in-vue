@@ -33,7 +33,12 @@
       height="28"
       viewBox="0 0 28 28"
     >
-      <path d="M3 3 L3 25 L23 14 z" stroke="red" stroke-width="3" fill="red" />
+      <path
+        d="M3 3 L3 25 L23 14 z"
+        stroke="black"
+        stroke-width="3"
+        fill="black"
+      />
     </svg>
   </div>
 </template>

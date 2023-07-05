@@ -179,9 +179,9 @@ export default {
     defineBorder(typeName) {
       return {
         [`border-${this.styleMapping[`${typeName}`].borders[0]}`]:
-          "2px solid red",
+          "2px solid black",
         [`border-${this.styleMapping[`${typeName}`].borders[1]}`]:
-          "2px solid red",
+          "2px solid black",
       };
     },
     toggleMatrix() {
