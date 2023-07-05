@@ -46,18 +46,22 @@ export default {
       styleMapping: {
         fire: {
           borders: ["bottom", "left"],
+          roundBorder: ["top", "right"],
           background: "rgb(250, 90, 90)",
         },
         delegate: {
           borders: ["bottom", "right"],
+          roundBorder: ["top", "left"],
           background: "orange",
         },
         strategy: {
           borders: ["top", "left"],
+          roundBorder: ["bottom", "right"],
           background: "yellow",
         },
         redundant: {
           borders: ["top", "right"],
+          roundBorder: ["bottom", "left"],
           background: "green",
         },
       },
@@ -171,6 +175,7 @@ export default {
             "grid-area": nameOfType,
             ...this.defineBorder(nameOfType),
             ...this.defineBackground(nameOfType),
+            ...this.defineBorderRounding(nameOfType),
           };
         default:
           return {};
@@ -199,6 +204,12 @@ export default {
         "background-color": `${this.styleMapping[`${typeName}`].background}`,
       };
     },
+    defineBorderRounding(typeName) {
+      return {
+        [`border-${this.styleMapping[`${typeName}`].roundBorder[0]}` +
+        `-${this.styleMapping[`${typeName}`].roundBorder[1]}-radius`]: "25px",
+      };
+    },
   },
 };
 </script>
@@ -222,7 +233,7 @@ ul {
 }
 .matrix > ul {
   margin: 0;
-  padding: 0;
+  padding: 25px;
   position: relative;
 }
 </style>
