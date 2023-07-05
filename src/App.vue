@@ -178,7 +178,10 @@ export default {
             ...this.defineBorderRounding(nameOfType),
           };
         default:
-          return {};
+          return {
+            borderRadius: "25px",
+            ...this.defineBackground(nameOfType),
+          };
       }
     },
     defineBorder(typeName) {
