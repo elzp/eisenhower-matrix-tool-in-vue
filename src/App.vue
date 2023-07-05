@@ -1,5 +1,6 @@
 <template>
-  <button @click="toggleMatrix">Matrix view</button>
+  <button @click="changeStyleToMatrix">Matrix view</button>
+  <button @click="changeStyleToGroupedList">Grouped List</button>
   <FunctionalButton
     :type="'add new'"
     :taskType="''"
@@ -43,11 +44,27 @@ export default {
       visibility: false,
       buttonName: "add",
       style: "matrix",
-      borderMapping: {
-        fire: ["bottom", "left"],
-        delegate: ["bottom", "right"],
-        strategy: ["top", "left"],
-        redundant: ["top", "right"],
+      styleMapping: {
+        fire: {
+          borders: ["bottom", "left"],
+          roundBorder: ["top", "right"],
+          background: "rgb(250, 90, 90)",
+        },
+        delegate: {
+          borders: ["bottom", "right"],
+          roundBorder: ["top", "left"],
+          background: "orange",
+        },
+        strategy: {
+          borders: ["top", "left"],
+          roundBorder: ["bottom", "right"],
+          background: "yellow",
+        },
+        redundant: {
+          borders: ["top", "right"],
+          roundBorder: ["bottom", "left"],
+          background: "green",
+        },
       },
       defaultdataToChange: {
         task: {
@@ -158,6 +175,13 @@ export default {
           return {
             "grid-area": nameOfType,
             ...this.defineBorder(nameOfType),
+            ...this.defineBackground(nameOfType),
+            ...this.defineBorderRounding(nameOfType),
+          };
+        case "groupedList":
+          return {
+            borderRadius: "25px",
+            ...this.defineBackground(nameOfType),
           };
         default:
           return {};
@@ -165,19 +189,28 @@ export default {
     },
     defineBorder(typeName) {
       return {
-        [`border-${this.borderMapping[`${typeName}`][0]}`]: "2px solid red",
-        [`border-${this.borderMapping[`${typeName}`][1]}`]: "2px solid red",
+        [`border-${this.styleMapping[`${typeName}`].borders[0]}`]:
+          "2px solid black",
+        [`border-${this.styleMapping[`${typeName}`].borders[1]}`]:
+          "2px solid black",
       };
     },
-    toggleMatrix() {
-      switch (this.style) {
-        case "matrix":
-          this.style = "";
-          break;
-        default:
-          this.style = "matrix";
-          break;
-      }
+    changeStyleToMatrix() {
+      this.style = "matrix";
+    },
+    changeStyleToGroupedList() {
+      this.style = "groupedList";
+    },
+    defineBackground(typeName) {
+      return {
+        "background-color": `${this.styleMapping[`${typeName}`].background}`,
+      };
+    },
+    defineBorderRounding(typeName) {
+      return {
+        [`border-${this.styleMapping[`${typeName}`].roundBorder[0]}` +
+        `-${this.styleMapping[`${typeName}`].roundBorder[1]}-radius`]: "25px",
+      };
     },
   },
 };
@@ -195,14 +228,20 @@ export default {
 
 ul {
   list-style-type: none;
+  padding-inline-start: 0;
+
+  padding: 25px;
+  position: relative;
 }
 .matrix {
   display: grid;
   grid-template-areas: "delegate fire" "redundant strategy";
 }
+.groupedList {
+  display: flex;
+  flex-direction: column;
+}
 .matrix > ul {
   margin: 0;
-  padding: 0;
-  position: relative;
 }
 </style>

@@ -10,7 +10,7 @@
     <div v-if="!this.checkIfIsEmpty(this.tasks)">
       <ul v-for="item in tasks" :key="item">
         <li>
-          <div>
+          <div class="task">
             <div>{{ item.name }} - {{ item.status }}</div>
             <FunctionalButton
               :type="'change'"
@@ -33,7 +33,12 @@
       height="28"
       viewBox="0 0 28 28"
     >
-      <path d="M3 3 L3 25 L23 14 z" stroke="red" stroke-width="3" fill="red" />
+      <path
+        d="M3 3 L3 25 L23 14 z"
+        stroke="black"
+        stroke-width="3"
+        fill="black"
+      />
     </svg>
   </div>
 </template>
@@ -109,5 +114,11 @@ a {
   position: absolute;
   top: calc(100% - 13px);
   left: calc(100% - 22px);
+  z-index: 3;
+}
+.task {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 </style>
