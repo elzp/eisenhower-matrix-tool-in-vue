@@ -1,5 +1,5 @@
 <template>
-  <button @click="toggleMatrix">Matrix view</button>
+  <button @click="changeStyleToMatrix">Matrix view</button>
   <FunctionalButton
     :type="'add new'"
     :taskType="''"
@@ -192,15 +192,8 @@ export default {
           "2px solid black",
       };
     },
-    toggleMatrix() {
-      switch (this.style) {
-        case "matrix":
-          this.style = "";
-          break;
-        default:
-          this.style = "matrix";
-          break;
-      }
+    changeStyleToMatrix() {
+      this.style = "matrix";
     },
     defineBackground(typeName) {
       return {
