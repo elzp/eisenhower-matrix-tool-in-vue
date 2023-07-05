@@ -229,6 +229,7 @@ export default {
 
 ul {
   list-style-type: none;
+  padding-inline-start: 0;
 }
 .matrix {
   display: grid;
