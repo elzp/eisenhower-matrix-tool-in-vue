@@ -1,5 +1,6 @@
 <template>
   <button @click="changeStyleToMatrix">Matrix view</button>
+  <button @click="changeStyleToGroupedList">Grouped List</button>
   <FunctionalButton
     :type="'add new'"
     :taskType="''"
@@ -195,6 +196,9 @@ export default {
     changeStyleToMatrix() {
       this.style = "matrix";
     },
+    changeStyleToGroupedList() {
+      this.style = "groupedList";
+    },
     defineBackground(typeName) {
       return {
         "background-color": `${this.styleMapping[`${typeName}`].background}`,
@@ -227,6 +231,10 @@ ul {
 .matrix {
   display: grid;
   grid-template-areas: "delegate fire" "redundant strategy";
+}
+.groupedList {
+  display: flex;
+  flex-direction: column;
 }
 .matrix > ul {
   margin: 0;
