@@ -178,11 +178,13 @@ export default {
             ...this.defineBackground(nameOfType),
             ...this.defineBorderRounding(nameOfType),
           };
-        default:
+        case "groupedList":
           return {
             borderRadius: "25px",
             ...this.defineBackground(nameOfType),
           };
+        default:
+          return {};
       }
     },
     defineBorder(typeName) {
