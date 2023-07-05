@@ -227,6 +227,9 @@ export default {
 ul {
   list-style-type: none;
   padding-inline-start: 0;
+
+  padding: 25px;
+  position: relative;
 }
 .matrix {
   display: grid;
@@ -238,7 +241,5 @@ ul {
 }
 .matrix > ul {
   margin: 0;
-  padding: 25px;
-  position: relative;
 }
 </style>
