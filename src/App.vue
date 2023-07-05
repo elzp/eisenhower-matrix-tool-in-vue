@@ -43,11 +43,23 @@ export default {
       visibility: false,
       buttonName: "add",
       style: "matrix",
-      borderMapping: {
-        fire: ["bottom", "left"],
-        delegate: ["bottom", "right"],
-        strategy: ["top", "left"],
-        redundant: ["top", "right"],
+      styleMapping: {
+        fire: {
+          borders: ["bottom", "left"],
+          background: "rgb(250, 90, 90)",
+        },
+        delegate: {
+          borders: ["bottom", "right"],
+          background: "orange",
+        },
+        strategy: {
+          borders: ["top", "left"],
+          background: "yellow",
+        },
+        redundant: {
+          borders: ["top", "right"],
+          background: "green",
+        },
       },
       defaultdataToChange: {
         task: {
@@ -158,6 +170,7 @@ export default {
           return {
             "grid-area": nameOfType,
             ...this.defineBorder(nameOfType),
+            ...this.defineBackground(nameOfType),
           };
         default:
           return {};
@@ -165,8 +178,10 @@ export default {
     },
     defineBorder(typeName) {
       return {
-        [`border-${this.borderMapping[`${typeName}`][0]}`]: "2px solid red",
-        [`border-${this.borderMapping[`${typeName}`][1]}`]: "2px solid red",
+        [`border-${this.styleMapping[`${typeName}`].borders[0]}`]:
+          "2px solid red",
+        [`border-${this.styleMapping[`${typeName}`].borders[1]}`]:
+          "2px solid red",
       };
     },
     toggleMatrix() {
@@ -178,6 +193,11 @@ export default {
           this.style = "matrix";
           break;
       }
+    },
+    defineBackground(typeName) {
+      return {
+        "background-color": `${this.styleMapping[`${typeName}`].background}`,
+      };
     },
   },
 };
