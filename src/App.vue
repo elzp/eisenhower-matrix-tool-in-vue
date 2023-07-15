@@ -247,4 +247,9 @@ ul {
 .matrix > ul {
   margin: 0;
 }
+button {
+  margin: 10px 0 0 10px;
+  border-radius: 0;
+  background-color: white;
+}
 </style>
