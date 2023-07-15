@@ -25,12 +25,14 @@
       @TaskToUpdate="update"
     />
   </div>
+  <PwaPrompt />
 </template>
 
 <script>
 import SectionOfMatrix from "./components/SectionOfMatrix.vue";
 import FunctionalButton from "./components/FunctionalButton.vue";
 import TaskSettings from "./components/TaskSettings.vue";
+import PwaPrompt from "./components/PwaPrompt.vue";
 
 export default {
   name: "App",
@@ -38,6 +40,7 @@ export default {
     SectionOfMatrix,
     FunctionalButton,
     TaskSettings,
+    PwaPrompt,
   },
   data() {
     return {
