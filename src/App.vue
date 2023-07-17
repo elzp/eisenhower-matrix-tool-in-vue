@@ -1,6 +1,8 @@
 <template>
-  <div @click="changeStyleTo('matrix')">Matrix view</div>
-  <div @click="changeStyleTo('grouped')">Grouped List</div>
+  <div class="grouped">
+    <div class="functional" @click="changeStyleTo('matrix')">Matrix view</div>
+    <div class="functional" @click="changeStyleTo('grouped')">Grouped List</div>
+  </div>
   <FunctionalButton
     :type="'add new'"
     :taskType="''"
@@ -258,5 +260,14 @@ button {
   margin: 10px 0 0 10px;
   border-radius: 0;
   background-color: white;
+}
+.grouped {
+  position: fixed;
+  z-index: 3;
+}
+.functional {
+  width: 100px;
+  background-color: white;
+  border-bottom: 2px solid black;
 }
 </style>
