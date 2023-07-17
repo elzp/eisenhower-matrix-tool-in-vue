@@ -1,6 +1,6 @@
 <template>
-  <button @click="changeStyleToMatrix">Matrix view</button>
-  <button @click="changeStyleToGroupedList">Grouped List</button>
+  <button @click="changeStyleTo('matrix')">Matrix view</button>
+  <button @click="changeStyleTo('grouped')">Grouped List</button>
   <FunctionalButton
     :type="'add new'"
     :taskType="''"
@@ -198,11 +198,18 @@ export default {
           "2px solid black",
       };
     },
-    changeStyleToMatrix() {
-      this.style = "matrix";
-    },
-    changeStyleToGroupedList() {
-      this.style = "groupedList";
+    changeStyleTo(type) {
+      switch (type) {
+        case "matrix":
+          this.style = "matrix";
+          break;
+        case "grouped":
+          this.style = "groupedList";
+          break;
+        default:
+          this.style = "matrix";
+          break;
+      }
     },
     defineBackground(typeName) {
       return {
