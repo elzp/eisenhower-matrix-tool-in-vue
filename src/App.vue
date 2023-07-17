@@ -1,6 +1,6 @@
 <template>
-  <button @click="changeStyleTo('matrix')">Matrix view</button>
-  <button @click="changeStyleTo('grouped')">Grouped List</button>
+  <div @click="changeStyleTo('matrix')">Matrix view</div>
+  <div @click="changeStyleTo('grouped')">Grouped List</div>
   <FunctionalButton
     :type="'add new'"
     :taskType="''"
