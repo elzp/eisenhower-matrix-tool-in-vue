@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      values: ["fire", "to delegate", "strategy", "redundant"],
+      values: ["fire", "delegate", "strategy", "redundant"],
     };
   },
   methods: {
