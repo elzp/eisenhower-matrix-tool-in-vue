@@ -18,6 +18,7 @@
           :data="item"
           @settings="getSettingsData"
           :style="style"
+          :styleMapping="styleMapping"
         />
       </li>
     </ul>

@@ -9,7 +9,13 @@
       v-if="style !== 'unordered'"
     />
     <div v-if="!this.checkIfIsEmpty(this.tasks)">
-      <ul v-for="item in tasks" :key="item">
+      <ul
+        v-for="item in tasks"
+        :key="item"
+        :style="{
+          background: background,
+        }"
+      >
         <li>
           <div class="task">
             <div>{{ item.name }} - {{ item.status }}</div>
@@ -55,11 +61,13 @@ export default {
   props: {
     data: Object,
     style: String,
+    styleMapping: Object,
   },
   data() {
     return {
       tasks: this.data.tasks || [],
       styleOfArrow: {},
+      background: this.styleMapping[`${this.data.name}`].background,
     };
   },
   methods: {
@@ -96,6 +104,7 @@ export default {
 ul {
   list-style-type: none;
   padding: 0;
+  margin: 0 min(200px, 20%);
 }
 li {
   display: inline-block;
