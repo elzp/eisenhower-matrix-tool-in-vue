@@ -120,7 +120,7 @@ export default {
         if (important) {
           this.form.type = "fire";
         } else {
-          this.form.type = "to delegate";
+          this.form.type = "delegate";
         }
       } else {
         if (important) {
@@ -136,7 +136,7 @@ export default {
           this.taskAttribute.important = true;
           this.taskAttribute.urgent = true;
           break;
-        case "to delegate":
+        case "delegate":
           this.taskAttribute.important = false;
           this.taskAttribute.urgent = true;
           break;
