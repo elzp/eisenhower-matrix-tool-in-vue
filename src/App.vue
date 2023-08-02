@@ -1,6 +1,9 @@
 <template>
   <div class="grouped">
     <div class="functional" @click="changeStyleTo('matrix')">Matrix view</div>
+    <div class="functional" @click="changeStyleTo('unordered')">
+      Unordered List
+    </div>
     <div class="functional" @click="changeStyleTo('grouped')">Grouped List</div>
   </div>
   <FunctionalButton
@@ -48,7 +51,7 @@ export default {
     return {
       visibility: false,
       buttonName: "add",
-      style: "matrix",
+      style: "unordered",
       styleMapping: {
         fire: {
           borders: ["bottom", "left"],
@@ -208,8 +211,11 @@ export default {
         case "grouped":
           this.style = "groupedList";
           break;
+        case "unordered":
+          this.style = "unordered";
+          break;
         default:
-          this.style = "matrix";
+          this.style = "unordered";
           break;
       }
     },
@@ -241,8 +247,8 @@ export default {
 ul {
   list-style-type: none;
   padding-inline-start: 0;
-
-  padding: 25px;
+  margin: 0;
+  padding: 0;
   position: relative;
 }
 .matrix {
@@ -253,8 +259,10 @@ ul {
   display: flex;
   flex-direction: column;
 }
-.matrix > ul {
-  margin: 0;
+.matrix,
+.groupedList > ul {
+  padding: 25px;
+  margin: 5px;
 }
 button {
   margin: 10px 0 0 10px;

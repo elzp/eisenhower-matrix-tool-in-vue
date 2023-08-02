@@ -1,11 +1,12 @@
 <template>
   <div>
-    <h1>{{ data.name }}</h1>
+    <h1 v-if="style !== 'unordered'">{{ data.name }}</h1>
     <FunctionalButton
       :type="'add new'"
       :taskType="data.name"
       :id="0"
       @settings="getSettingsData"
+      v-if="style !== 'unordered'"
     />
     <div v-if="!this.checkIfIsEmpty(this.tasks)">
       <ul v-for="item in tasks" :key="item">
@@ -22,7 +23,7 @@
         </li>
       </ul>
     </div>
-    <div v-else>no task available</div>
+    <div v-else-if="style === !'unordered'">no task available</div>
     <svg
       v-if="
         (data.name === 'fire' || data.name === 'delegate') && style === 'matrix'
@@ -120,5 +121,8 @@ a {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+.unordered {
+  margin: 0;
 }
 </style>
