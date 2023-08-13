@@ -53,6 +53,7 @@ export default {
       visibility: false,
       buttonName: "add",
       style: "unordered",
+      lastIdInApp: 0,
       styleMapping: {
         fire: {
           borders: ["bottom", "left"],
@@ -94,19 +95,11 @@ export default {
       tasksData: [
         {
           name: "fire",
-          tasks: [
-            { name: "a", status: "todo", id: 1 },
-            { name: "b", status: "todo", id: 2 },
-            { name: "c", status: "done", id: 3 },
-          ],
+          tasks: [],
         },
         {
           name: "delegate",
-          tasks: [
-            { name: "a2", status: "todo", id: 1 },
-            { name: "b2", status: "todo", id: 2 },
-            { name: "c2", status: "done", id: 3 },
-          ],
+          tasks: [],
         },
         {
           name: "strategy",
@@ -141,7 +134,9 @@ export default {
             name: sendData.taskName,
             status: "todo",
             id: length !== 0 ? it.tasks[length - 1].id + 1 : 1,
+            idInApp: this.lastIdInApp + 1,
           };
+          this.lastIdInApp++;
           it.tasks.push(newTask);
         }
       });
@@ -155,7 +150,9 @@ export default {
               name: sendData.name,
               status: sendData.status,
               id: sendData.id,
+              idInApp: this.lastIdInApp + 1,
             };
+            this.lastIdInApp++;
           }
         });
       } else {
