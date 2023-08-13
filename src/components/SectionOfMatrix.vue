@@ -1,27 +1,25 @@
 <template>
   <div>
-    <h1 v-if="style !== 'unordered'">{{ data.name }}</h1>
+    <h1 v-if="style !== 'unordered'">{{ type }}</h1>
     <FunctionalButton
       :type="'add new'"
-      :taskType="data.name"
+      :taskType="type"
       :id="0"
       @settings="getSettingsData"
       v-if="style !== 'unordered'"
     />
     <div v-if="!this.checkIfIsEmpty(this.tasks)">
-      <ul
-        v-for="item in tasks"
-        :key="item"
-        :style="{
-          background: background,
-        }"
-      >
-        <li>
+      <ul v-for="item in tasks" :key="item">
+        <li
+          :style="{
+            background: 'transparent',
+          }"
+        >
           <div class="task">
             <div>{{ item.name }} - {{ item.status }}</div>
             <FunctionalButton
               :type="'change'"
-              :taskType="data.name"
+              :taskType="type"
               :id="item.id"
               @settings="getSettingsData"
             />
@@ -31,10 +29,8 @@
     </div>
     <div v-else-if="style === !'unordered'">no task available</div>
     <svg
-      v-if="
-        (data.name === 'fire' || data.name === 'delegate') && style === 'matrix'
-      "
-      :class="'arrow-' + `${data.name}`"
+      v-if="(type === 'fire' || type === 'delegate') && style === 'matrix'"
+      :class="'arrow-' + `${type}`"
       xmlns="http://www.w3.org/2000/svg"
       width="28"
       height="28"
@@ -59,15 +55,15 @@ export default {
     FunctionalButton,
   },
   props: {
-    data: Object,
+    tasksObject: Object,
+    type: String,
     style: String,
     styleMapping: Object,
   },
   data() {
     return {
-      tasks: this.data.tasks || [],
+      tasks: this.tasksObject || [],
       styleOfArrow: {},
-      background: this.styleMapping[`${this.data.name}`].background,
     };
   },
   methods: {
@@ -93,9 +89,6 @@ export default {
       this.styleOfArrow = styleOfArrow;
     },
   },
-  // mounted() {
-  //   console.log(this.setArrowStyle(this.props.data.name));
-  // },
 };
 </script>
 

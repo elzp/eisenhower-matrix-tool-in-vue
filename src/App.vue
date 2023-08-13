@@ -15,7 +15,8 @@
     <ul v-for="item in tasksData" :key="item" :style="chooseStyle(item.name)">
       <li>
         <SectionOfMatrix
-          :data="item"
+          :tasksObject="item.tasks"
+          :type="item.name"
           @settings="getSettingsData"
           :style="style"
           :styleMapping="styleMapping"
