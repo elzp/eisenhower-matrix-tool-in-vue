@@ -105,6 +105,7 @@ ul {
 li {
   display: inline-block;
   margin: 0 10px;
+  width: 100%;
 }
 a {
   color: #42b983;
@@ -126,6 +127,8 @@ a {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin: 2px auto;
+  justify-content: space-between;
 }
 .unordered {
   margin: 0;
