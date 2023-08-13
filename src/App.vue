@@ -11,18 +11,49 @@
     :taskType="''"
     @settings="getSettingsData"
   />
-  <div :class="style">
-    <ul v-for="item in tasksData" :key="item" :style="chooseStyle(item.name)">
-      <li>
-        <SectionOfMatrix
-          :tasksObject="item.tasks"
-          :type="item.name"
-          @settings="getSettingsData"
-          :style="style"
-          :styleMapping="styleMapping"
-        />
-      </li>
-    </ul>
+  <div>
+    <div v-if="style === 'unordered'" :class="style">
+      <ul
+        v-for="item in tasksData
+          .reduce((before, current) => {
+            const tasks = current.tasks.map((it) => {
+              return {
+                type: current.name,
+                tasks: [it],
+              };
+            });
+            return [...before, ...tasks];
+          }, [])
+          .sort((a, b) => {
+            return a.tasks[0].idInApp - b.tasks[0].idInApp;
+          })"
+        :key="item"
+        :style="chooseStyle(item.name)"
+      >
+        <li>
+          <SectionOfMatrix
+            :tasksObject="item.tasks"
+            :type="item.type"
+            @settings="getSettingsData"
+            :style="style"
+            :styleMapping="styleMapping"
+          />
+        </li>
+      </ul>
+    </div>
+    <div v-else :class="style">
+      <ul v-for="item in tasksData" :key="item" :style="chooseStyle(item.name)">
+        <li>
+          <SectionOfMatrix
+            :tasksObject="item.tasks"
+            :type="item.name"
+            @settings="getSettingsData"
+            :style="style"
+            :styleMapping="styleMapping"
+          />
+        </li>
+      </ul>
+    </div>
   </div>
   <div v-if="visibility">
     <TaskSettings
