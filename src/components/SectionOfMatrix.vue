@@ -12,7 +12,10 @@
       <ul v-for="item in tasks" :key="item">
         <li
           :style="{
-            background: 'transparent',
+            background:
+              style === 'unordered'
+                ? this.styleMapping[`${this.type}`].background
+                : 'transparent',
           }"
         >
           <div class="task">
