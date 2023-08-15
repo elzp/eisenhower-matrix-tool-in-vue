@@ -61,6 +61,7 @@
       :dataToChange="dataToChange"
       @taskToAdd="addNew"
       @TaskToUpdate="update"
+      @exit="this.visibility = false"
     />
   </div>
   <PwaPrompt />
