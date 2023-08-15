@@ -1,7 +1,13 @@
 <template>
   <div class="form">
     <h1>setting</h1>
-    <svg class="exit" height="17" width="17" fill="rgb(244, 99, 99)">
+    <svg
+      class="exit"
+      height="17"
+      width="17"
+      fill="rgb(244, 99, 99)"
+      @click="emitExit"
+    >
       <line
         x1="0"
         y1="0"
@@ -124,6 +130,9 @@ export default {
         status: this.form.taskStatus,
         id: this.id,
       });
+    },
+    emitExit() {
+      this.$emit("exit");
     },
     update(sendData) {
       this.convertTypeToAttributes(sendData);
