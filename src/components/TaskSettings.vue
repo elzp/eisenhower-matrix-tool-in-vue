@@ -209,4 +209,11 @@ h1 {
   flex-direction: row;
   width: fit-content;
 }
+.exit {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: rgb(244, 99, 99);
+  border: solid 1px rgb(244, 99, 99);
+}
 </style>
