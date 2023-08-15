@@ -1,6 +1,22 @@
 <template>
   <div class="form">
     <h1>setting</h1>
+    <svg class="exit" height="17" width="17" fill="rgb(244, 99, 99)">
+      <line
+        x1="0"
+        y1="0"
+        x2="17"
+        y2="17"
+        style="stroke: black; stroke-width: 1"
+      />
+      <line
+        x1="0"
+        y1="17"
+        x2="17"
+        y2="0"
+        style="stroke: black; stroke-width: 1"
+      />
+    </svg>
     <div class="section">
       <div class="description">Task description:</div>
       <input v-model="form.taskName" type="text" placeholder="Text input" />
