@@ -306,6 +306,7 @@ ul {
 .groupedList {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .matrix,
 .groupedList > ul {
