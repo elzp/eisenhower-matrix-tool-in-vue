@@ -92,21 +92,25 @@ export default {
           borders: ["bottom", "left"],
           roundBorder: ["top", "right"],
           background: "rgb(250, 90, 90)",
+          justifySelf: "start",
         },
         delegate: {
           borders: ["bottom", "right"],
           roundBorder: ["top", "left"],
           background: "orange",
+          justifySelf: "end",
         },
         strategy: {
           borders: ["top", "left"],
           roundBorder: ["bottom", "right"],
           background: "yellow",
+          justifySelf: "start",
         },
         redundant: {
           borders: ["top", "right"],
           roundBorder: ["bottom", "left"],
           background: "green",
+          justifySelf: "end",
         },
       },
       defaultdataToChange: {
@@ -216,6 +220,7 @@ export default {
             ...this.defineBorder(nameOfType),
             ...this.defineBackground(nameOfType),
             ...this.defineBorderRounding(nameOfType),
+            ...this.defineJustification(nameOfType),
           };
         case "groupedList":
           return {
@@ -260,6 +265,17 @@ export default {
         [`border-${this.styleMapping[`${typeName}`].roundBorder[0]}` +
         `-${this.styleMapping[`${typeName}`].roundBorder[1]}-radius`]: "25px",
       };
+    },
+    defineJustification(typeName) {
+      if (typeName === "fire" || typeName === "strategy") {
+        return {
+          "justify-self": "start",
+        };
+      } else {
+        return {
+          "justify-self": "end",
+        };
+      }
     },
   },
 };
