@@ -297,6 +297,7 @@ ul {
   margin: 0;
   padding: 0;
   position: relative;
+  width: 60%;
 }
 .matrix {
   display: grid;
