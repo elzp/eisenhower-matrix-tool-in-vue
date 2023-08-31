@@ -308,6 +308,9 @@ ul {
   flex-direction: column;
   align-items: center;
 }
+.unordered > ul {
+  margin: 0 auto;
+}
 .matrix,
 .groupedList > ul {
   padding: 25px;
