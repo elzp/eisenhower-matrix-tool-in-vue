@@ -339,6 +339,7 @@ button {
 .functional {
   width: 100px;
   background-color: white;
-  border-bottom: 2px solid black;
+  border: 2px solid black;
+  margin: 2px;
 }
 </style>
