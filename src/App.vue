@@ -1,5 +1,6 @@
 <template>
   <div class="grouped">
+    <h2>Choose view:</h2>
     <div class="functional" @click="changeStyleTo('matrix')">Matrix view</div>
     <div class="functional" @click="changeStyleTo('unordered')">
       Unordered List
@@ -295,6 +296,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+h2 {
+  font-size: 0.8em;
 }
 
 ul {
