@@ -314,6 +314,8 @@ ul {
 .matrix {
   display: grid;
   grid-template-areas: "delegate fire" "redundant strategy";
+  grid-template-columns: 50% 50%;
+  width: 100%;
 }
 .groupedList {
   display: flex;
@@ -322,11 +324,18 @@ ul {
 }
 .unordered > ul {
   margin: 0 auto;
+  width: 95%;
 }
-.matrix,
+.matrix > ul {
+  padding: 5px;
+  margin: 0;
+  width: 90%;
+}
+
 .groupedList > ul {
   padding: 25px;
   margin: 5px;
+  width: 60%;
 }
 button {
   margin: 10px 0 0 10px;
