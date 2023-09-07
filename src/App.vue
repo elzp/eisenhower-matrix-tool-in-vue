@@ -12,7 +12,7 @@
       @settings="getSettingsData"
     />
   </div>
-  <div>
+  <div class="main">
     <div>
       <div v-if="style === 'unordered'" :class="style">
         <ul
@@ -296,19 +296,20 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  width: 90vw;
+  display: grid;
+  grid-template-areas: "grouped main";
+  grid-template-columns: 1fr 10fr;
 }
-
 h2 {
   font-size: 0.8em;
 }
-
 ul {
   list-style-type: none;
   padding-inline-start: 0;
   margin: 0;
   padding: 0;
   position: relative;
-  width: 60%;
 }
 .matrix {
   display: grid;
@@ -333,8 +334,15 @@ button {
   background-color: white;
 }
 .grouped {
-  position: fixed;
   z-index: 3;
+  grid-area: grouped;
+  justify-self: left;
+}
+.main {
+  width: 100%;
+  justify-self: center;
+  grid-area: main;
+  justify-self: center;
 }
 .functional {
   width: 100px;
