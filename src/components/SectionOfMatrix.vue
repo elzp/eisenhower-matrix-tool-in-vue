@@ -100,7 +100,7 @@ export default {
 ul {
   list-style-type: none;
   padding: 0;
-  margin: 0 min(200px, 20%);
+  margin: 0 min(50px, 20%);
 }
 li {
   display: inline-block;
