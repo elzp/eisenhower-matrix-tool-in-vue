@@ -27,7 +27,7 @@
               return [...before, ...tasks];
             }, [])
             .sort((a, b) => {
-              return a.tasks[0].idInApp - b.tasks[0].idInApp;
+              return a.tasks[0].id4User - b.tasks[0].id4User;
             })"
           :key="item"
           :style="chooseStyle(item.name)"
@@ -93,6 +93,7 @@ export default {
       visibility: false,
       buttonName: "add",
       style: "unordered",
+      lastId4User: 0,
       lastIdInApp: 0,
       styleMapping: {
         fire: {
@@ -172,16 +173,18 @@ export default {
     },
     addNew(sendData) {
       this.tasksData.forEach((it) => {
+        const length = it.tasks.length;
         if (it.name === sendData.type) {
-          const length = it.tasks.length;
+          const idOfLastTask = it.tasks[length - 1]?.id || 0;
           const newTask = {
             name: sendData.taskName,
             status: "todo",
-            id: length !== 0 ? it.tasks[length - 1].id + 1 : 1,
-            idInApp: this.lastIdInApp + 1,
+            id: length !== 0 ? idOfLastTask + 1 : 1,
+            id4User: this.lastId4User + 1,
           };
-          this.lastIdInApp++;
           it.tasks.push(newTask);
+          this.lastId4User++;
+          this.lastIdInApp++;
         }
       });
       this.visibility = false;
@@ -194,9 +197,8 @@ export default {
               name: sendData.name,
               status: sendData.status,
               id: sendData.id,
-              idInApp: this.lastIdInApp + 1,
+              id4User: this.lastId4User + 1,
             };
-            this.lastIdInApp++;
           }
         });
       } else {
@@ -208,6 +210,7 @@ export default {
               name: sendData.name,
               status: sendData.status,
               id: length !== 0 ? it.tasks[length - 1].id + 1 : 1,
+              id4User: this.lastId4User + 1,
             };
             it.tasks.push(newTask);
           }
@@ -216,6 +219,8 @@ export default {
           }
         });
       }
+      this.lastId4User++;
+      this.lastIdInApp++;
       this.dataToChange = this.defaultdataToChange;
       this.visibility = false;
     },
