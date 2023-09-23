@@ -79,6 +79,9 @@ import SectionOfMatrix from "./components/SectionOfMatrix.vue";
 import FunctionalButton from "./components/FunctionalButton.vue";
 import TaskSettings from "./components/TaskSettings.vue";
 import PwaPrompt from "./components/PwaPrompt.vue";
+import firebase from "./firebaseInit";
+import { getFirestore } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 export default {
   name: "App",
@@ -183,11 +186,29 @@ export default {
             id4User: this.lastId4User + 1,
           };
           it.tasks.push(newTask);
+          this.write(sendData.taskName, sendData.type, idOfLastTask);
           this.lastId4User++;
           this.lastIdInApp++;
         }
       });
       this.visibility = false;
+    },
+    async write(taskName, type, lastusersId) {
+      const db = getFirestore(firebase);
+      try {
+        await setDoc(doc(db, "tasks", "task" + this.lastIdInApp), {
+          desc: taskName,
+          done: false,
+          type: type,
+          userId: 1,
+          idInType: lastusersId == 0 ? 1 : lastusersId + 1,
+          id4User: this.lastId4User + 1,
+          idInEntireApp: this.lastIdInApp + 1,
+        });
+        console.log("Document written with ID: ", lastusersId);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
     },
     update(sendData) {
       if (sendData.prevType === sendData.type) {
