@@ -8,21 +8,21 @@
       @settings="getSettingsData"
       v-if="style !== 'unordered'"
     />
-    <div v-if="!this.checkIfIsEmpty(this.tasks)">
-      <ul v-for="item in tasks" :key="item">
+    <div v-if="!this.checkIfIsEmpty(this.tasksObject)">
+      <ul v-for="item in tasksObject" :key="item">
         <li
           :style="{
             background:
               style === 'unordered'
-                ? this.styleMapping[`${this.type}`].background
+                ? this.styleMapping[`${item.type}`].background
                 : 'transparent',
           }"
         >
           <div class="task">
-            <div>{{ item.name }} - {{ item.status }}</div>
+            <div>{{ item.name }} - {{ item.status }} {{ item.id }}</div>
             <FunctionalButton
               :type="'change'"
-              :taskType="type"
+              :taskType="item.type"
               :id="item.id"
               @settings="getSettingsData"
             />
@@ -59,13 +59,14 @@ export default {
   },
   props: {
     tasksObject: Object,
-    type: String,
+    typename: String,
     style: String,
     styleMapping: Object,
   },
   data() {
     return {
       tasks: this.tasksObject || [],
+      type: this.typename || this.tasksObject[0]?.type || "",
       styleOfArrow: {},
     };
   },

@@ -15,44 +15,31 @@
   <div class="main">
     <div>
       <div v-if="style === 'unordered'" :class="style">
-        <ul
-          v-for="item in tasksData
-            .reduce((before, current) => {
-              const tasks = current.tasks.map((it) => {
-                return {
-                  type: current.name,
-                  tasks: [it],
-                };
-              });
-              return [...before, ...tasks];
-            }, [])
-            .sort((a, b) => {
-              return a.tasks[0].id4User - b.tasks[0].id4User;
-            })"
-          :key="item"
-          :style="chooseStyle(item.name)"
-        >
-          <li>
-            <SectionOfMatrix
-              :tasksObject="item.tasks"
-              :type="item.type"
-              @settings="getSettingsData"
-              :style="style"
-              :styleMapping="styleMapping"
-            />
-          </li>
-        </ul>
+        <SectionOfMatrix
+          :tasksObject="
+            tasks.sort((a, b) => {
+              return a.id - b.id;
+            })
+          "
+          @settings="getSettingsData"
+          :style="style"
+          :styleMapping="styleMapping"
+        />
       </div>
       <div v-else :class="style">
-        <ul
-          v-for="item in tasksData"
-          :key="item"
-          :style="chooseStyle(item.name)"
-        >
+        <ul v-for="item in types" :key="item" :style="chooseStyle(item)">
           <li>
             <SectionOfMatrix
-              :tasksObject="item.tasks"
-              :type="item.name"
+              :tasksObject="
+                tasks.reduce((before, now) => {
+                  if (now.type === item) {
+                    return [...before, now];
+                  } else {
+                    return [...before];
+                  }
+                }, [])
+              "
+              :typename="item"
               @settings="getSettingsData"
               :style="style"
               :styleMapping="styleMapping"
@@ -96,7 +83,6 @@ export default {
       visibility: false,
       buttonName: "add",
       style: "unordered",
-      lastId4User: 0,
       lastIdInApp: 0,
       styleMapping: {
         fire: {
@@ -125,39 +111,19 @@ export default {
         },
       },
       defaultdataToChange: {
-        task: {
-          name: "",
-          status: "",
-          id: 0,
-        },
         type: "",
+        name: "",
+        status: "",
+        id: 0,
       },
       dataToChange: {
-        task: {
-          name: "",
-          status: "",
-          id: 0,
-        },
         type: "",
+        name: "",
+        status: "",
+        id: 0,
       },
-      tasksData: [
-        {
-          name: "fire",
-          tasks: [],
-        },
-        {
-          name: "delegate",
-          tasks: [],
-        },
-        {
-          name: "strategy",
-          tasks: [],
-        },
-        {
-          name: "redundant",
-          tasks: [],
-        },
-      ],
+      types: ["fire", "delegate", "strategy", "redundant"],
+      tasks: [],
     };
   },
   methods: {
@@ -165,83 +131,61 @@ export default {
       this.visibility = sendData.settingsVisibility;
       this.buttonName = sendData.buttonName;
       if (sendData?.id > 0) {
-        this.dataToChange = {
-          task: this.tasksData.filter((it) => it.name === sendData.taskType)[0]
-            .tasks[sendData.id - 1],
-          type: sendData.taskType,
-        };
+        const newdataToChange = {};
+        this.tasks.forEach((it) => {
+          if (sendData.id === it.id) {
+            newdataToChange.type = it.type;
+            newdataToChange.name = it.name;
+            newdataToChange.status = it.status;
+            newdataToChange.id = it.id;
+          }
+        });
+        this.dataToChange = newdataToChange;
       } else {
         this.dataToChange.type = sendData.taskType;
       }
     },
     addNew(sendData) {
-      this.tasksData.forEach((it) => {
-        const length = it.tasks.length;
-        if (it.name === sendData.type) {
-          const idOfLastTask = it.tasks[length - 1]?.id || 0;
-          const newTask = {
-            name: sendData.taskName,
-            status: "todo",
-            id: length !== 0 ? idOfLastTask + 1 : 1,
-            id4User: this.lastId4User + 1,
-          };
-          it.tasks.push(newTask);
-          this.write(sendData.taskName, sendData.type, idOfLastTask);
-          this.lastId4User++;
-          this.lastIdInApp++;
-        }
-      });
+      const newTask = {
+        type: sendData.type,
+        name: sendData.taskName,
+        status: "todo",
+        id: this.lastIdInApp + 1,
+      };
+      this.tasks.push(newTask);
+      this.write(sendData.taskName, sendData.type, this.lastIdInApp + 1);
+      this.lastIdInApp++;
       this.visibility = false;
     },
-    async write(taskName, type, lastusersId) {
+    async write(taskName, type, id) {
       const db = getFirestore(firebase);
       try {
-        await setDoc(doc(db, "tasks", "task" + this.lastIdInApp), {
+        await setDoc(doc(db, "tasks", "task" + id), {
           desc: taskName,
           done: false,
           type: type,
           userId: 1,
-          idInType: lastusersId == 0 ? 1 : lastusersId + 1,
-          id4User: this.lastId4User + 1,
-          idInEntireApp: this.lastIdInApp + 1,
+          id,
         });
-        console.log("Document written with ID: ", lastusersId);
+        console.log("Document written with ID: ", id);
       } catch (e) {
         console.error("Error adding document: ", e);
       }
     },
     update(sendData) {
-      if (sendData.prevType === sendData.type) {
-        this.tasksData.forEach((it) => {
-          if (it.name === sendData.type) {
-            it.tasks[sendData.id - 1] = {
-              name: sendData.name,
-              status: sendData.status,
-              id: sendData.id,
-              id4User: this.lastId4User + 1,
-            };
-          }
-        });
-      } else {
-        this.tasksData.forEach((it) => {
-          // add to new type
-          if (it.name === sendData.type) {
-            const length = it.tasks.length;
-            const newTask = {
-              name: sendData.name,
-              status: sendData.status,
-              id: length !== 0 ? it.tasks[length - 1].id + 1 : 1,
-              id4User: this.lastId4User + 1,
-            };
-            it.tasks.push(newTask);
-          }
-          if (it.name === sendData.prevType) {
-            it.tasks.splice(sendData.id - 1, 1);
-          }
-        });
-      }
-      this.lastId4User++;
-      this.lastIdInApp++;
+      this.tasks = this.tasks.map((it2) => {
+        if (it2.id === sendData.id) {
+          return {
+            name: sendData.name,
+            status: sendData.status,
+            id: sendData.id,
+            type: sendData.type,
+            prevName: it2.name,
+          };
+        } else {
+          return it2;
+        }
+      });
       this.dataToChange = this.defaultdataToChange;
       this.visibility = false;
     },

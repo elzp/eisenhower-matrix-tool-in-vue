@@ -108,11 +108,11 @@ export default {
         important: false,
       },
       form: {
-        taskName: this.dataToChange.task.name,
-        taskStatus: this.dataToChange.task.status,
+        taskName: this.dataToChange.name,
+        taskStatus: this.dataToChange.status,
         type: this.dataToChange.type || "redundant",
       },
-      id: this.dataToChange.task.id,
+      id: this.dataToChange.id,
     };
   },
   methods: {
