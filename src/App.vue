@@ -166,6 +166,7 @@ export default {
           type: type,
           userId: 1,
           id,
+          prevName: "",
         });
         console.log("Document written with ID: ", id);
       } catch (e) {
@@ -188,6 +189,22 @@ export default {
       });
       this.dataToChange = this.defaultdataToChange;
       this.visibility = false;
+    },
+    async change(taskName, status, type, id, prevName) {
+      const db = getFirestore(firebase);
+      try {
+        await setDoc(doc(db, "tasks", "task" + id), {
+          desc: taskName,
+          done: status,
+          type: type,
+          userId: 1,
+          id: id,
+          prevName: prevName,
+        });
+        console.log("Document written with ID: ", id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
     },
     chooseStyle(nameOfType) {
       switch (this.style) {
