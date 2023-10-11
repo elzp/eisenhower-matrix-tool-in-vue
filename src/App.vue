@@ -176,6 +176,13 @@ export default {
     update(sendData) {
       this.tasks = this.tasks.map((it2) => {
         if (it2.id === sendData.id) {
+          this.change(
+            sendData.name,
+            sendData.status,
+            sendData.type,
+            sendData.id,
+            it2.name
+          );
           return {
             name: sendData.name,
             status: sendData.status,
