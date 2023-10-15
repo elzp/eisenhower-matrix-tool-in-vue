@@ -318,6 +318,9 @@ export default {
       }
     },
   },
+  async created() {
+    this.setServerDataInAppAndBrowser();
+  },
 };
 </script>
 
