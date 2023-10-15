@@ -213,6 +213,9 @@ export default {
         console.error("Error adding document: ", e);
       }
     },
+    isWebLocalDataEmpty() {
+      return localStorage.getItem("tasks") === null;
+    },
     chooseStyle(nameOfType) {
       switch (this.style) {
         case "matrix":
