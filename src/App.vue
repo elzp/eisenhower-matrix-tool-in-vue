@@ -239,6 +239,19 @@ export default {
       }
       return dataArr;
     },
+    async setServerDataInAppAndBrowser() {
+      // set tasks from:
+      console.log(this.isWebLocalDataEmpty());
+      if (!this.isWebLocalDataEmpty()) {
+        // localStorage
+        this.tasks = JSON.parse(localStorage.getItem("tasks"));
+      } else {
+        // database
+        const newData = await this.getServerData();
+        this.tasks = newData;
+        localStorage.setItem("tasks", JSON.stringify(newData));
+      }
+    },
     chooseStyle(nameOfType) {
       switch (this.style) {
         case "matrix":
