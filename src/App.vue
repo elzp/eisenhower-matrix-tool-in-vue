@@ -67,9 +67,13 @@ import FunctionalButton from "./components/FunctionalButton.vue";
 import TaskSettings from "./components/TaskSettings.vue";
 import PwaPrompt from "./components/PwaPrompt.vue";
 import firebase from "./firebaseInit";
-import { getFirestore } from "firebase/firestore";
-import { doc, setDoc } from "firebase/firestore";
-
+import {
+  getFirestore,
+  doc,
+  collection,
+  setDoc,
+  getDocs,
+} from "firebase/firestore";
 export default {
   name: "App",
   components: {
@@ -215,6 +219,25 @@ export default {
     },
     isWebLocalDataEmpty() {
       return localStorage.getItem("tasks") === null;
+    },
+    async getServerData() {
+      const db = getFirestore(firebase);
+      const snapshot = collection(db, "tasks");
+      const docsData = await getDocs(snapshot);
+      let dataArr = [];
+      if (docsData) {
+        await docsData.forEach((doc) => {
+          dataArr.push({
+            type: doc.data().type,
+            name: doc.data().desc,
+            status: doc.data().done ? "done" : "todo",
+            id: doc.data().id,
+          });
+        });
+      } else {
+        console.log("No such document!");
+      }
+      return dataArr;
     },
     chooseStyle(nameOfType) {
       switch (this.style) {
