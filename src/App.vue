@@ -85,6 +85,10 @@ export default {
   data() {
     return {
       visibility: false,
+      isServerDataSynchronized:
+        localStorage.getItem("Synchronized") === null
+          ? false
+          : localStorage.getItem("Synchronized"),
       buttonName: "add",
       style: "unordered",
       lastIdInApp: 0,
@@ -158,6 +162,7 @@ export default {
       };
       this.tasks.push(newTask);
       this.write(sendData.taskName, sendData.type, this.lastIdInApp + 1);
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
       this.lastIdInApp++;
       this.visibility = false;
     },
@@ -198,6 +203,7 @@ export default {
           return it2;
         }
       });
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
       this.dataToChange = this.defaultdataToChange;
       this.visibility = false;
     },
@@ -218,7 +224,12 @@ export default {
       }
     },
     isWebLocalDataEmpty() {
-      return localStorage.getItem("tasks") === null;
+      const isLocalstorageNull = localStorage.getItem("tasks") === null;
+      if (isLocalstorageNull) {
+        // to not trigger server reads after refreshing app
+        localStorage.setItem("Synchronized", "false");
+      }
+      return isLocalstorageNull;
     },
     async getServerData() {
       const db = getFirestore(firebase);
@@ -241,8 +252,7 @@ export default {
     },
     async setServerDataInAppAndBrowser() {
       // set tasks from:
-      console.log(this.isWebLocalDataEmpty());
-      if (!this.isWebLocalDataEmpty()) {
+      if (this.isServerDataSynchronized && !this.isWebLocalDataEmpty()) {
         // localStorage
         this.tasks = JSON.parse(localStorage.getItem("tasks"));
       } else {
@@ -250,6 +260,9 @@ export default {
         const newData = await this.getServerData();
         this.tasks = newData;
         localStorage.setItem("tasks", JSON.stringify(newData));
+        // to not trigger server reads after refreshing app
+        this.isServerDataSynchronized = true;
+        localStorage.setItem("Synchronized", "true");
       }
     },
     chooseStyle(nameOfType) {
