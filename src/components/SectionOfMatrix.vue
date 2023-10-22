@@ -21,6 +21,10 @@
           <div class="task">
             <div>{{ item.name }} - {{ item.status }} {{ item.id }}</div>
             <FunctionalButton
+              :type="'delete'"
+              @deleteTask="() => this.$emit('TaskToDelete', { id: item.id })"
+            />
+            <FunctionalButton
               :type="'change'"
               :taskType="item.type"
               :id="item.id"

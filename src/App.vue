@@ -22,6 +22,7 @@
             })
           "
           @settings="getSettingsData"
+          @TaskToDelete="deleteTask"
           :style="style"
           :styleMapping="styleMapping"
         />
@@ -41,6 +42,7 @@
               "
               :typename="item"
               @settings="getSettingsData"
+              @TaskToDelete="deleteTask"
               :style="style"
               :styleMapping="styleMapping"
             />
@@ -222,6 +224,9 @@ export default {
       } catch (e) {
         console.error("Error adding document: ", e);
       }
+    },
+    deleteTask(sendData) {
+      console.log("todelete", sendData);
     },
     isWebLocalDataEmpty() {
       const isLocalstorageNull = localStorage.getItem("tasks") === null;

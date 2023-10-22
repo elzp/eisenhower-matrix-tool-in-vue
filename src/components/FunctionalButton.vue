@@ -36,6 +36,8 @@ export default {
         this.$emit("newTask");
       } else if (this.type === "update") {
         this.$emit("updateTask");
+      } else if (this.type === "delete") {
+        this.$emit("deleteTask");
       }
     },
   },
