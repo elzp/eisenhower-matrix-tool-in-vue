@@ -125,12 +125,14 @@ export default {
         name: "",
         status: "",
         id: 0,
+        active: true,
       },
       dataToChange: {
         type: "",
         name: "",
         status: "",
         id: 0,
+        active: true,
       },
       types: ["fire", "delegate", "strategy", "redundant"],
       tasks: [],
@@ -161,14 +163,15 @@ export default {
         name: sendData.taskName,
         status: "todo",
         id: this.lastIdInApp + 1,
+        active: true,
       };
       this.tasks.push(newTask);
-      this.write(sendData.taskName, sendData.type, this.lastIdInApp + 1);
+      this.write(sendData.taskName, sendData.type, this.lastIdInApp + 1, true);
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
       this.lastIdInApp++;
       this.visibility = false;
     },
-    async write(taskName, type, id) {
+    async write(taskName, type, id, active) {
       const db = getFirestore(firebase);
       try {
         await setDoc(doc(db, "tasks", "task" + id), {
@@ -178,6 +181,7 @@ export default {
           userId: 1,
           id,
           prevName: "",
+          active: active,
         });
         console.log("Document written with ID: ", id);
       } catch (e) {
@@ -192,7 +196,8 @@ export default {
             sendData.status,
             sendData.type,
             sendData.id,
-            it2.name
+            it2.name,
+            true
           );
           return {
             name: sendData.name,
@@ -200,6 +205,7 @@ export default {
             id: sendData.id,
             type: sendData.type,
             prevName: it2.name,
+            active: true,
           };
         } else {
           return it2;
@@ -209,7 +215,7 @@ export default {
       this.dataToChange = this.defaultdataToChange;
       this.visibility = false;
     },
-    async change(taskName, status, type, id, prevName) {
+    async change(taskName, status, type, id, prevName, active) {
       const db = getFirestore(firebase);
       try {
         await setDoc(doc(db, "tasks", "task" + id), {
@@ -219,6 +225,7 @@ export default {
           userId: 1,
           id: id,
           prevName: prevName,
+          active: active,
         });
         console.log("Document written with ID: ", id);
       } catch (e) {
@@ -227,6 +234,18 @@ export default {
     },
     deleteTask(sendData) {
       console.log("todelete", sendData);
+      this.tasks = this.tasks.map((it) => {
+        if (it.id === sendData.id) {
+          this.change(it.name, it.status, it.type, it.id, it.name, false);
+          return {
+            ...it,
+            active: false,
+          };
+        } else {
+          return it;
+        }
+      });
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
     isWebLocalDataEmpty() {
       const isLocalstorageNull = localStorage.getItem("tasks") === null;
@@ -248,6 +267,7 @@ export default {
             name: doc.data().desc,
             status: doc.data().done ? "done" : "todo",
             id: doc.data().id,
+            active: doc.data().active,
           });
         });
       } else {
