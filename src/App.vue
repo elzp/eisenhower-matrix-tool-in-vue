@@ -17,9 +17,11 @@
       <div v-if="style === 'unordered'" :class="style">
         <SectionOfMatrix
           :tasksObject="
-            tasks.sort((a, b) => {
-              return a.id - b.id;
-            })
+            tasks
+              .sort((a, b) => {
+                return a.id - b.id;
+              })
+              .filter((it) => it.active)
           "
           @settings="getSettingsData"
           @TaskToDelete="deleteTask"
@@ -32,13 +34,15 @@
           <li>
             <SectionOfMatrix
               :tasksObject="
-                tasks.reduce((before, now) => {
-                  if (now.type === item) {
-                    return [...before, now];
-                  } else {
-                    return [...before];
-                  }
-                }, [])
+                tasks
+                  .reduce((before, now) => {
+                    if (now.type === item) {
+                      return [...before, now];
+                    } else {
+                      return [...before];
+                    }
+                  }, [])
+                  .filter((it) => it.active)
               "
               :typename="item"
               @settings="getSettingsData"
