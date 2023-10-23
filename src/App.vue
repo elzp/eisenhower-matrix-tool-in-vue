@@ -11,6 +11,15 @@
       :taskType="''"
       @settings="getSettingsData"
     />
+    <button
+      @click="
+        () => {
+          deletedVisibility = !deletedVisibility;
+        }
+      "
+    >
+      show deleted
+    </button>
   </div>
   <div class="main">
     <div>
@@ -113,6 +122,7 @@ export default {
           : localStorage.getItem("Synchronized"),
       buttonName: "add",
       style: "unordered",
+      deletedVisibility: false,
       lastIdInApp: 0,
       styleMapping: {
         fire: {
