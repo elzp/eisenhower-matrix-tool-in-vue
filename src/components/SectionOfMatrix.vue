@@ -1,13 +1,14 @@
 <template>
   <div>
-    <h1 v-if="style !== 'unordered'">{{ type }}</h1>
-    <FunctionalButton
-      :type="'add new'"
-      :taskType="type"
-      :id="0"
-      @settings="getSettingsData"
-      v-if="style !== 'unordered'"
-    />
+    <div v-if="style !== 'unordered' && style !== 'deleted'">
+      <h1 v-if="style !== 'unordered'">{{ type }}</h1>
+      <FunctionalButton
+        :type="'add new'"
+        :taskType="type"
+        :id="0"
+        @settings="getSettingsData"
+      />
+    </div>
     <div v-if="!this.checkIfIsEmpty(this.tasksObject)">
       <ul v-for="item in tasksObject" :key="item">
         <li
@@ -21,11 +22,12 @@
           <div class="task">
             <div>{{ item.name }} - {{ item.status }} {{ item.id }}</div>
             <FunctionalButton
+              v-if="style !== 'deleted'"
               :type="'delete'"
               @deleteTask="() => this.$emit('TaskToDelete', { id: item.id })"
             />
             <FunctionalButton
-              :type="'change'"
+              :type="style !== 'deleted' ? 'change' : 'restore'"
               :taskType="item.type"
               :id="item.id"
               @settings="getSettingsData"

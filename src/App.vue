@@ -53,6 +53,22 @@
           </li>
         </ul>
       </div>
+      <div v-if="deletedVisibility">
+        <h1>deleted</h1>
+        <SectionOfMatrix
+          :tasksObject="
+            tasks
+              .sort((a, b) => {
+                return a.id - b.id;
+              })
+              .filter((it) => !it.active)
+          "
+          @settings="getSettingsData"
+          @TaskToDelete="deleteTask"
+          :style="'deleted'"
+          :styleMapping="styleMapping"
+        />
+      </div>
     </div>
     <div v-if="visibility">
       <TaskSettings
