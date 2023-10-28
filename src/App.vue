@@ -103,6 +103,7 @@ import {
   doc,
   collection,
   setDoc,
+  getDoc,
   getDocs,
 } from "firebase/firestore";
 export default {
@@ -305,6 +306,14 @@ export default {
       }
       return dataArr;
     },
+    async getServerInfo() {
+      const db = getFirestore(firebase);
+      const snapshot = doc(db, "info", "global");
+      const docsData = await getDoc(snapshot);
+      if (docsData) {
+        this.lastIdInApp = docsData.data().lastTaskId;
+      }
+    },
     async setServerDataInAppAndBrowser() {
       // set tasks from:
       if (this.isServerDataSynchronized && !this.isWebLocalDataEmpty()) {
@@ -387,7 +396,8 @@ export default {
     },
   },
   async created() {
-    this.setServerDataInAppAndBrowser();
+    await this.setServerDataInAppAndBrowser();
+    await this.getServerInfo();
   },
 };
 </script>
