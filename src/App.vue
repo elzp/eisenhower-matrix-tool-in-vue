@@ -200,6 +200,7 @@ export default {
       this.write(sendData.taskName, sendData.type, this.lastIdInApp + 1, true);
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
       this.lastIdInApp++;
+      this.setServerInfo();
       this.visibility = false;
     },
     async write(taskName, type, id, active) {
@@ -312,6 +313,17 @@ export default {
       const docsData = await getDoc(snapshot);
       if (docsData) {
         this.lastIdInApp = docsData.data().lastTaskId;
+      }
+    },
+    async setServerInfo() {
+      const db = getFirestore(firebase);
+      try {
+        await setDoc(doc(db, "info", "global"), {
+          lastTaskId: this.lastIdInApp,
+        });
+        console.log("updated global ID");
+      } catch (e) {
+        console.error("Error while updating global ID ", e);
       }
     },
     async setServerDataInAppAndBrowser() {
