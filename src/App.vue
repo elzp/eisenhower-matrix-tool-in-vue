@@ -280,6 +280,20 @@ export default {
       });
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
+    restoreTask(sendData) {
+      this.tasks = this.tasks.map((it) => {
+        if (it.id === sendData.id) {
+          this.change(it.name, it.status, it.type, it.id, it.name, true);
+          return {
+            ...it,
+            active: true,
+          };
+        } else {
+          return it;
+        }
+      });
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
+    },
     isWebLocalDataEmpty() {
       const isLocalstorageNull = localStorage.getItem("tasks") === null;
       if (isLocalstorageNull) {
