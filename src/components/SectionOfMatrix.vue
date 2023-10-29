@@ -27,7 +27,17 @@
               @deleteTask="() => this.$emit('TaskToDelete', { id: item.id })"
             />
             <FunctionalButton
-              :type="style !== 'deleted' ? 'change' : 'restore'"
+              v-if="style === 'deleted'"
+              :type="'restore'"
+              @restoreTask="
+                () => {
+                  this.$emit('TaskToRestore', { id: item.id });
+                }
+              "
+            />
+            <FunctionalButton
+              v-if="style !== 'deleted'"
+              :type="'change'"
               :taskType="item.type"
               :id="item.id"
               @settings="getSettingsData"

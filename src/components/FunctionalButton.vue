@@ -38,6 +38,8 @@ export default {
         this.$emit("updateTask");
       } else if (this.type === "delete") {
         this.$emit("deleteTask");
+      } else if (this.type === "restore") {
+        this.$emit("restoreTask");
       }
     },
   },

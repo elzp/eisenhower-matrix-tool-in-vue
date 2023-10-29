@@ -74,6 +74,7 @@
           "
           @settings="getSettingsData"
           @TaskToDelete="deleteTask"
+          @TaskToRestore="restoreTask"
           :style="'deleted'"
           :styleMapping="styleMapping"
         />
