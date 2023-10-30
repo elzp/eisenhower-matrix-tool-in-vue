@@ -40,6 +40,10 @@ export default {
         this.$emit("deleteTask");
       } else if (this.type === "restore") {
         this.$emit("restoreTask");
+      } else if (this.type === "done") {
+        this.$emit("changeStatus", "done");
+      } else if (this.type === "todo") {
+        this.$emit("changeStatus", "todo");
       }
     },
   },

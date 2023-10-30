@@ -25,6 +25,11 @@
               :type="item.status === 'done' ? 'todo' : 'done'"
               :taskType="item.type"
               :id="item.id"
+              @changeStatus="
+                (el) => {
+                  this.$emit('changeStatus', { id: item.id, newStatus: el });
+                }
+              "
             />
             <div>{{ item.name }} - {{ item.status }} {{ item.id }}</div>
             <FunctionalButton
