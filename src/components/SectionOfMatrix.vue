@@ -20,6 +20,12 @@
           }"
         >
           <div class="task">
+            <FunctionalButton
+              v-if="style !== 'deleted'"
+              :type="item.status === 'done' ? 'todo' : 'done'"
+              :taskType="item.type"
+              :id="item.id"
+            />
             <div>{{ item.name }} - {{ item.status }} {{ item.id }}</div>
             <FunctionalButton
               v-if="style !== 'deleted'"
