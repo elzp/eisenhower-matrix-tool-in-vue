@@ -23,14 +23,30 @@
   </div>
   <div class="main">
     <div>
+      <h1>DONE</h1>
+      <SectionOfMatrix
+        :tasksObject="
+          tasks
+            .sort((a, b) => {
+              return a.id - b.id;
+            })
+            .filter((it) => it.active && it.status === 'done')
+        "
+        @settings="getSettingsData"
+        @TaskToDelete="deleteTask"
+        @changeStatus="changeStatus"
+        :style="'done'"
+        :styleMapping="styleMapping"
+      />
       <div v-if="style === 'unordered'" :class="style">
+        <h1>TO DO</h1>
         <SectionOfMatrix
           :tasksObject="
             tasks
               .sort((a, b) => {
                 return a.id - b.id;
               })
-              .filter((it) => it.active)
+              .filter((it) => it.active && it.status === 'todo')
           "
           @settings="getSettingsData"
           @TaskToDelete="deleteTask"
@@ -52,7 +68,7 @@
                       return [...before];
                     }
                   }, [])
-                  .filter((it) => it.active)
+                  .filter((it) => it.active && it.status === 'todo')
               "
               :typename="item"
               @settings="getSettingsData"

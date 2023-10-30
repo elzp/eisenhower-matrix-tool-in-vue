@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div v-if="style !== 'unordered' && style !== 'deleted'">
+    <div
+      v-if="style !== 'unordered' && style !== 'deleted' && style !== 'done'"
+    >
       <h1 v-if="style !== 'unordered'">{{ type }}</h1>
       <FunctionalButton
         :type="'add new'"
@@ -33,7 +35,7 @@
             />
             <div>{{ item.name }} - {{ item.status }} {{ item.id }}</div>
             <FunctionalButton
-              v-if="style !== 'deleted'"
+              v-if="style !== 'deleted' && style !== 'done'"
               :type="'delete'"
               @deleteTask="() => this.$emit('TaskToDelete', { id: item.id })"
             />
@@ -47,7 +49,7 @@
               "
             />
             <FunctionalButton
-              v-if="style !== 'deleted'"
+              v-if="style !== 'deleted' && style !== 'done'"
               :type="'change'"
               :taskType="item.type"
               :id="item.id"
