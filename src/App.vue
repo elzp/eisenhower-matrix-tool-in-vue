@@ -34,6 +34,7 @@
           "
           @settings="getSettingsData"
           @TaskToDelete="deleteTask"
+          @changeStatus="changeStatus"
           :style="style"
           :styleMapping="styleMapping"
         />
@@ -56,6 +57,7 @@
               :typename="item"
               @settings="getSettingsData"
               @TaskToDelete="deleteTask"
+              @changeStatus="changeStatus"
               :style="style"
               :styleMapping="styleMapping"
             />
@@ -293,6 +295,26 @@ export default {
         }
       });
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
+    },
+    changeStatus(sendData) {
+      this.tasks = this.tasks.map((it) => {
+        if (it.id === sendData.id) {
+          this.change(
+            it.name,
+            sendData.newStatus,
+            it.type,
+            it.id,
+            it.name,
+            it.active
+          );
+          return {
+            ...it,
+            status: sendData.newStatus,
+          };
+        } else {
+          return it;
+        }
+      });
     },
     isWebLocalDataEmpty() {
       const isLocalstorageNull = localStorage.getItem("tasks") === null;
