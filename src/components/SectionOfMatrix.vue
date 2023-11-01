@@ -11,7 +11,7 @@
         @settings="getSettingsData"
       />
     </div>
-    <div v-if="!this.checkIfIsEmpty(this.tasksObject)">
+    <div class="ul-container" v-if="!this.checkIfIsEmpty(this.tasksObject)">
       <ul v-for="item in tasksObject" :key="item">
         <li
           :style="{
@@ -130,7 +130,8 @@ export default {
 ul {
   list-style-type: none;
   padding: 0;
-  margin: 0 min(50px, 20%);
+  display: flex;
+  flex-direction: row;
 }
 li {
   display: inline-block;
@@ -152,6 +153,13 @@ a {
   top: calc(100% - 13px);
   left: calc(100% - 22px);
   z-index: 3;
+}
+
+.ul-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  flex-wrap: wrap;
 }
 .task {
   display: flex;
