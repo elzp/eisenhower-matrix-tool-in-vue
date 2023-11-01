@@ -49,7 +49,7 @@
                 }
               "
             />
-            <div>{{ item.name }} - {{ item.status }} {{ item.id }}</div>
+            <TaskComp :name="item.name" :id="item.id" />
             <FunctionalButton
               v-if="style !== 'deleted' && style !== 'done'"
               :type="'delete'"
@@ -96,11 +96,13 @@
 
 <script>
 import FunctionalButton from "./FunctionalButton.vue";
+import TaskComp from "./TaskComp.vue";
 
 export default {
   name: "SectionOfMatrix",
   components: {
     FunctionalButton,
+    TaskComp,
   },
   props: {
     tasksObject: Object,
