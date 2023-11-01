@@ -331,6 +331,7 @@ export default {
           return it;
         }
       });
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
     },
     isWebLocalDataEmpty() {
       const isLocalstorageNull = localStorage.getItem("tasks") === null;
