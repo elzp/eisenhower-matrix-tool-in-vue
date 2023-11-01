@@ -14,14 +14,30 @@
     <div class="ul-container" v-if="!this.checkIfIsEmpty(this.tasksObject)">
       <ul v-for="item in tasksObject" :key="item">
         <li
-          :style="{
-            background:
-              style === 'unordered'
-                ? this.styleMapping[`${item.type}`].background
-                : 'transparent',
-          }"
+          :style="
+            style !== 'unordered'
+              ? {
+                  background:
+                    style === 'unordered'
+                      ? this.styleMapping[`${item.type}`].background
+                      : 'transparent',
+                }
+              : {}
+          "
         >
-          <div class="task">
+          <div
+            class="task"
+            :style="
+              style === 'unordered'
+                ? {
+                    background:
+                      style === 'unordered'
+                        ? this.styleMapping[`${item.type}`].background
+                        : 'transparent',
+                  }
+                : {}
+            "
+          >
             <FunctionalButton
               v-if="style !== 'deleted'"
               :type="item.status === 'done' ? 'todo' : 'done'"
@@ -163,10 +179,14 @@ a {
 }
 .task {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   margin: 2px auto;
+  padding: 5px;
   justify-content: space-between;
+  /* width: fit-content; */
+  border-radius: 10%;
+  border: 3px solid grey;
 }
 .unordered {
   margin: 0;
