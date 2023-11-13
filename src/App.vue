@@ -506,18 +506,17 @@ ul {
 }
 .unordered > ul {
   margin: 0 auto;
-  width: 95%;
+  width: 75%;
 }
 .matrix > ul {
   padding: 5px;
   margin: 0;
-  width: 90%;
+  width: 100%;
 }
 
 .groupedList > ul {
-  padding: 25px;
   margin: 5px;
-  width: 60%;
+  width: 100%;
 }
 button {
   margin: 10px 0 0 10px;
