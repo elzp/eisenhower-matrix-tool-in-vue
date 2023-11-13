@@ -13,29 +13,13 @@
     </div>
     <div class="ul-container" v-if="!this.checkIfIsEmpty(this.tasksObject)">
       <ul v-for="item in tasksObject" :key="item">
-        <li
-          :style="
-            style !== 'unordered'
-              ? {
-                  background:
-                    style === 'unordered'
-                      ? this.styleMapping[`${item.type}`].background
-                      : 'transparent',
-                }
-              : {}
-          "
-        >
+        <li>
           <div
             class="task"
             :style="
               style === 'unordered'
-                ? {
-                    background:
-                      style === 'unordered'
-                        ? this.styleMapping[`${item.type}`].background
-                        : 'transparent',
-                  }
-                : {}
+                ? { background: this.styleMapping[`${item.type}`].background }
+                : { background: 'white' }
             "
           >
             <FunctionalButton
