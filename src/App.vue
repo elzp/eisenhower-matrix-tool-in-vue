@@ -40,21 +40,23 @@
       />
     </div>
     <div>
-      <h1>DONE</h1>
-      <SectionOfMatrix
-        :tasksObject="
-          tasks
-            .sort((a, b) => {
-              return a.id - b.id;
-            })
-            .filter((it) => it.active && it.status === 'done')
-        "
-        @settings="getSettingsData"
-        @TaskToDelete="deleteTask"
-        @changeStatus="changeStatus"
-        :style="'done'"
-        :styleMapping="styleMapping"
-      />
+      <div>
+        <h1>DONE</h1>
+        <SectionOfMatrix
+          :tasksObject="
+            tasks
+              .sort((a, b) => {
+                return a.id - b.id;
+              })
+              .filter((it) => it.active && it.status === 'done')
+          "
+          @settings="getSettingsData"
+          @TaskToDelete="deleteTask"
+          @changeStatus="changeStatus"
+          :style="'done'"
+          :styleMapping="styleMapping"
+        />
+      </div>
       <div v-if="style === 'unordered'" :class="style">
         <h1>TO DO</h1>
         <SectionOfMatrix
