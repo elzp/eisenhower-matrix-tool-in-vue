@@ -24,7 +24,7 @@ export default {
 }
 .name {
   text-align: left;
-  /* word-break: break-all; */
+  margin: 10px;
 }
 .id {
   text-align: right;
