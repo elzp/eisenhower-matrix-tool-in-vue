@@ -22,7 +22,7 @@
     </button>
   </div>
   <div class="main">
-    <div v-if="deletedVisibility">
+    <div class="deleted" v-if="deletedVisibility">
       <h1>DELETED</h1>
       <SectionOfMatrix
         :tasksObject="
@@ -538,5 +538,9 @@ button {
   background-color: white;
   border: 2px solid black;
   margin: 2px;
+}
+.deleted {
+  background-color: grey;
+  border-radius: 25px;
 }
 </style>
