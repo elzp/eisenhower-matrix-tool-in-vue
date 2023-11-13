@@ -22,6 +22,23 @@
     </button>
   </div>
   <div class="main">
+    <div v-if="deletedVisibility">
+      <h1>DELETED</h1>
+      <SectionOfMatrix
+        :tasksObject="
+          tasks
+            .sort((a, b) => {
+              return a.id - b.id;
+            })
+            .filter((it) => !it.active)
+        "
+        @settings="getSettingsData"
+        @TaskToDelete="deleteTask"
+        @TaskToRestore="restoreTask"
+        :style="'deleted'"
+        :styleMapping="styleMapping"
+      />
+    </div>
     <div>
       <h1>DONE</h1>
       <SectionOfMatrix
@@ -79,23 +96,6 @@
             />
           </li>
         </ul>
-      </div>
-      <div v-if="deletedVisibility">
-        <h1>deleted</h1>
-        <SectionOfMatrix
-          :tasksObject="
-            tasks
-              .sort((a, b) => {
-                return a.id - b.id;
-              })
-              .filter((it) => !it.active)
-          "
-          @settings="getSettingsData"
-          @TaskToDelete="deleteTask"
-          @TaskToRestore="restoreTask"
-          :style="'deleted'"
-          :styleMapping="styleMapping"
-        />
       </div>
     </div>
     <div v-if="visibility">
