@@ -22,7 +22,7 @@
     </button>
   </div>
   <div class="main">
-    <div class="deleted" v-if="deletedVisibility">
+    <div class="deleted padding-10 margin-bottom-10" v-if="deletedVisibility">
       <h1>DELETED</h1>
       <SectionOfMatrix
         :tasksObject="
@@ -40,7 +40,7 @@
       />
     </div>
     <div>
-      <div class="done">
+      <div class="done padding-10 margin-bottom-10">
         <h1>DONE</h1>
         <SectionOfMatrix
           :tasksObject="
@@ -549,5 +549,13 @@ button {
 .done {
   background-color: rgb(109, 215, 119);
   border-radius: 25px;
+}
+
+.padding-10 {
+  padding: 10px;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 10px;
 }
 </style>
