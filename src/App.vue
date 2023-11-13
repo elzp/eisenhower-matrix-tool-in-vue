@@ -40,7 +40,7 @@
       />
     </div>
     <div>
-      <div>
+      <div class="done">
         <h1>DONE</h1>
         <SectionOfMatrix
           :tasksObject="
@@ -543,6 +543,11 @@ button {
 }
 .deleted {
   background-color: grey;
+  border-radius: 25px;
+}
+
+.done {
+  background-color: rgb(109, 215, 119);
   border-radius: 25px;
 }
 </style>
